@@ -14,15 +14,15 @@ dotnet pack /p:PackageVersion=${package_version} \
             --no-build \
             --no-restore
 
-dotnet nuget sign nupkgs/*.nupkg \
-            --CertificatePath \
-            --CertificatePassword \
-            --Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp \
+#dotnet nuget sign nupkgs/*.nupkg \
+#            --CertificatePath trusona.p12 \
+#            --CertificatePassword B242E50F-0194-43BD-AF83-265B004AEB83 \
+#            --Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp \
 
 dotnet nuget push nupkgs/*.nupkg \
             --source https://trusona.jfrog.io/trusona/api/nuget/nuget-local \
             --api-key ${NUGET_JFROG_API_KEY}
 
-dotnet nuget push nupkgs/*.nupkg \
-            --source https://api.nuget.org/v3/index.json \
-            --api-key ${NUGET_ORG_API_KEY}
+#dotnet nuget push nupkgs/*.nupkg \
+#            --source https://api.nuget.org/v3/index.json \
+#            --api-key ${NUGET_ORG_API_KEY}
