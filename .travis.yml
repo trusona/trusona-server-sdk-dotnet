@@ -1,0 +1,19 @@
+language: csharp
+solution: trusona-server-sdk-dotnet.sln
+mono: none
+dotnet: 2.0.0
+script:
+- dotnet build -c debug
+- dotnet build -c release
+- dotnet test TrusonaSDK.Test
+deploy:
+- provider: script
+  script: "./publish.sh debug"
+  skip_cleanup: true
+  on:
+    branch: master
+- provider: script
+  script: "./publish.sh release"
+  skip_cleanup: true
+  on:
+    tags: true

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<PackageId>Trusona.SDK</PackageId>
+		<Authors>Trusona, Inc.</Authors>
+		<Description>Trusona .NET SDK</Description>
+		<ReleaseVersion>2.0.1</ReleaseVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	  <DocumentationFile>bin\Debug\netstandard2.0\TrusonaSDK.API.xml</DocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	  <DebugType></DebugType>
+	  <DocumentationFile>bin\Release\netstandard2.0\TrusonaSDK.API.xml</DocumentationFile>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
+		<PackageReference Include="AutoMapper" Version="6.2.2" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Model\" />
+	  <Folder Include="Test\" />
+	  <Folder Include="Exception\" />
+	  <Folder Include="Extension\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\TrusonaSDK.HTTP\TrusonaSDK.HTTP.csproj" />
+	</ItemGroup>
+</Project>

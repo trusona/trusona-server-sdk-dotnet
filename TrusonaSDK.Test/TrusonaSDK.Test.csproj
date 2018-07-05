@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="Moq" Version="4.8.1" />
+    <PackageReference Include="FluentAssertions" Version="5.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="HTTP\" />
+    <Folder Include="API\" />
+    <Folder Include="HTTP\Client\" />
+    <Folder Include="HTTP\Client\Security\" />
+    <Folder Include="HTTP\Client\V2\" />
+    <Folder Include="HTTP\Client\V2\Service\" />
+    <Folder Include="HTTP\Client\V2\Response\" />
+    <Folder Include="HTTP\Client\V2\Request\" />
+    <Folder Include="HTTP\Client\Interceptor\" />
+    <Folder Include="Integration\" />
+    <Folder Include="API\Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrusonaSDK.API\TrusonaSDK.API.csproj" />
+    <ProjectReference Include="..\TrusonaSDK.HTTP\TrusonaSDK.HTTP.csproj" />
+  </ItemGroup>
+</Project>

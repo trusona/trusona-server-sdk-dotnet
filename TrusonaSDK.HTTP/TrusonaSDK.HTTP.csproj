@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Client\" />
+    <Folder Include="Client\Security\" />
+    <Folder Include="Client\V2\" />
+    <Folder Include="Client\V2\Response\" />
+    <Folder Include="Client\V2\Request\" />
+    <Folder Include="Client\V2\Service\" />
+    <Folder Include="Client\V2\Serialization\" />
+    <Folder Include="Client\Interceptor\" />
+    <Folder Include="Environment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
+  </ItemGroup>
+</Project>
