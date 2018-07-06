@@ -6,7 +6,6 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
-   1. [Artifactory username and password](#artifactory-username-and-password)
    1. [Server SDK API Credentials](#server-sdk-api-credentials)
 1. [NuGet Artifactory Setup](#nuget-artifactory-setup)
    1. [Adding the Trusona repository](#adding-the-trusona-repository)
@@ -39,13 +38,6 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
 The Trusona SDK targets .NET Standard 2.0. For a comprehensive list of framework compatabilty, please reference the [.NET Standard Compatability Matrix](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)
 
 
-### Artifactory username and password
-
-Trusona uses Artifactory to distribute artifacts associated with the Trusona mobile and server SDKs.
-
-When Trusona provisions a developer account, we will create a new user in Artifactory and supply you with a username and password that you will use later on in this guide.
-
-
 ### Server SDK API Credentials
 
 The Server SDK requires API credentials that are used by the SDK to identify and authenticate requests from your application to the Trusona APIs.
@@ -65,7 +57,6 @@ To configure NuGet to use the Trusona repository, run the following commands. Fo
 
 ```
 nuget sources Add -Name Trusona -Source https://trusona.jfrog.io/trusona/api/nuget/nuget-local
-nuget setapikey <YOUR_ARTIFACTORY_USERNAME>:<YOUR_ARTIFACTORY_PASSWORD> -Source Trusona
 ```
 
 Alternatively, you may configure NuGet using Visual Studio. To configure the NuGet Visual Studio Extension to use the Trusona repository, you need to add another Package Source under NuGet Package Manager.
