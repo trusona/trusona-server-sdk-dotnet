@@ -38,6 +38,13 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
         .GetResult();
     }
 
+    protected static void BlockAsyncForResult(Task task)
+    {
+      task
+        .GetAwaiter()
+        .GetResult();
+    }
+
     protected async Task<T> Get<T>(string resource,
                                    string id = null,
                                    ICredentialProvider credentialProvider = null,

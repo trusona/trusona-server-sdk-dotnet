@@ -13,6 +13,13 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       this._credentialProvider = environment.CredentialProvider;
     }
 
+    public void DeleteUser(string userIdentifier)
+    {
+      BlockAsyncForResult(
+        DeleteUserAsync(userIdentifier)
+      );
+    }
+
     public async Task DeleteUserAsync(string userIdentifier)
     {
       await Delete(
