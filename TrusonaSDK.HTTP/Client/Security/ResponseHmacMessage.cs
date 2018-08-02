@@ -101,12 +101,14 @@ namespace TrusonaSDK.HTTP.Client.Security
       var contentTypeHeader = content.Headers.ContentType;
       var sb = new StringBuilder();
 
-      sb.Append(contentTypeHeader.MediaType);
+      if (contentTypeHeader != null) {
+        sb.Append(contentTypeHeader.MediaType);
 
-      foreach (var param in contentTypeHeader.Parameters)
-      {
-        sb.Append(";");
-        sb.Append(param);
+        foreach (var param in contentTypeHeader.Parameters)
+        {
+          sb.Append(";");
+          sb.Append(param);
+        }
       }
       return sb.ToString();
     }
