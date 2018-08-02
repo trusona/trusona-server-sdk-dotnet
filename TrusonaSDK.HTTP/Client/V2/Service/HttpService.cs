@@ -38,6 +38,13 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
         .GetResult();
     }
 
+    protected static void BlockAsyncForResult(Task task)
+    {
+      task
+        .GetAwaiter()
+        .GetResult();
+    }
+
     protected async Task<T> Get<T>(string resource,
                                    string id = null,
                                    ICredentialProvider credentialProvider = null,
@@ -121,6 +128,27 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
         return await HandleContent<T>(
           response.EnsureSuccessStatusCode().Content
         );
+      }
+      catch (HttpRequestException ex)
+      {
+        throw new TrusonaServiceException(ex, response, TryResolveRequestId(response));
+      }
+    }
+
+    protected async Task Delete(string resource, string id, ICredentialProvider credentialProvider = null)
+    {
+      var message = new HttpRequestMessage
+      {
+        Method = new HttpMethod("DELETE"),
+        RequestUri = new FluentUrlBuilder(_endpointUrl)
+          .AppendPath(resource)
+          .AppendPath(id)
+        };
+      var response = await _clientWrapper.HandleRequest(message, credentialProvider);
+
+      try
+      {
+        response.EnsureSuccessStatusCode();
       }
       catch (HttpRequestException ex)
       {

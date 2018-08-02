@@ -267,5 +267,30 @@ namespace TrusonaSDK.API
             .Throw<TrusonaException>();
     }
 
+    [Fact]
+    public void DeleteUser_should_return_no_content()
+    {
+      // given
+      SetupMock(statusCode: HttpStatusCode.NoContent);
+
+      // when
+      Action action = () => { sut.DeleteUser("foo"); };
+
+      // then
+      action.Should().NotThrow();
+    }
+
+    [Fact]
+    public void DeleteUser_should_throw_on_error()
+    {
+      // given
+      SetupMock(statusCode: HttpStatusCode.NotFound);
+
+      // when
+      Action action = () => { sut.DeleteUser("foo").Wait(); };
+
+      // then
+      action.Should().Throw<TrusonaException>();
+    }
   }
 }

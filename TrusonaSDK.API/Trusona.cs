@@ -32,6 +32,7 @@ namespace TrusonaSDK.API
     private IWebSdkConfigService _webSdkConfigService;
     private IIdentityDocumentService _identityDocumentService;
     private IDeviceService _deviceService;
+    private IUserService _userService;
 
     internal readonly IMapper mapper;
     internal readonly TimeSpan pollingInterval = TimeSpan.FromSeconds(5);
@@ -103,6 +104,15 @@ namespace TrusonaSDK.API
       {
         if (_deviceService == null) { _deviceService = _serviceFactory.CreateInstance<DeviceService>(); }
         return _deviceService;
+      }
+    }
+
+    internal IUserService UserService
+    {
+      get
+      {
+        if (_userService == null) { _userService = _serviceFactory.CreateInstance<UserService>(); }
+        return _userService;
       }
     }
 
