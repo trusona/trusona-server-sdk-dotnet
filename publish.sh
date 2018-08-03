@@ -21,7 +21,7 @@ dotnet pack /p:PackageVersion=${package_version} \
 
 dotnet nuget push nupkgs/*.nupkg \
             --source https://trusona.jfrog.io/trusona/api/nuget/nuget-local \
-            --api-key ${NUGET_JFROG_API_KEY}
+            --api-key "${NUGET_JFROG_USER}:${NUGET_JFROG_API_KEY}"
 
 #dotnet nuget push nupkgs/*.nupkg \
 #            --source https://api.nuget.org/v3/index.json \
