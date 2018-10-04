@@ -22,7 +22,7 @@ namespace TrusonaSDK.API
   public class TrusonaTest
   {
     #region Mock Setup
-    const string validToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0cnVhZG1pbi5hcGkudHJ1c29uYS5jb20iLCJzdWIiOiIwZjAzNDhmMC00NmQ2LTQ3YzktYmE0ZC0yZTdjZDdmODJlM2UiLCJhdWQiOiJhcGkudHJ1c29uYS5jb20iLCJleHAiOjE1MTk4ODU0OTgsImlhdCI6MTQ4ODMyNzg5OCwianRpIjoiNzg4YWYwNzAtNDBiOS00N2MxLWE3ZmUtOGUwZmE1NWUwMDE1IiwiYXRoIjoiUk9MRV9UUlVTVEVEX1JQX0NMSUVOVCJ9.2FNvjG9yB5DFEcNijk8TryRtKVffiDARRcRIb75Z_Pp85MxW63rhzdLFIN6PtQ1Tzb8lHPPM_4YOe-feeLOzWw";
+    const string validToken = "eyJraWQiOiI3ZDM0ODY2Yy1hZGNjLTRhNjAtYTJjZC1jMTc3MjZlMGExNTgiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI0YWUyMWFlNC1iZmM2LTRkOTAtOWRhMi02NGNlNTc4MzQ0YjMiLCJuYmYiOjE1Mzg2NzI3NDYsImF0aCI6IlJPTEVfVFJVU1RFRF9SUCIsImlzcyI6InRzOmY5ODM4NTU3LTk2N2MtNGM4Yi1iNmE1LTU0NmExZmUyM2Q5OCIsImV4cCI6MTg1NDI0MjI2NiwiaWF0IjoxNTM4NjcyNzQ2LCJqdGkiOiJhOGJjNGUxMi0yMmI2LTQwZmItOTUzOC04OTVkNmVhN2Y2ZjEifQ.ebEafr0MXn9vOKwZzb1LK2mIR8ZkmHQallUygZZt1qySXMXpwbZ56pvuEr0MKxzzfTSTQK2DapTSls76dzWmHqZiDVbav4Y7p5GbglZah62-B0RUBmVk6R4qlSJ-EdIndwM_PO2lCZNfPef-UpCZrRACM-uzQTTm5MooHZpp3CIHGWefIsv2tyZ1UFCEOIXElGe1a11Rcd69TH4NbVNqghqcbUzzc-5ScC9v3tR7FJQdrIRg93ZRrd19PwF1jjvY_SGYPJnAQ-XUhE6e4YCjYP2Prlh6iBViozeXA-27EpRxj-DZfieQnkze6VsKQUmRAsoNpk84ttPD2O6CBGZ1zQ";
 
     readonly Mock<IEnvironment> _mockEnvironment;
     readonly Mock<IHttpClientWrapper> _mockHttpClient;
@@ -230,7 +230,7 @@ namespace TrusonaSDK.API
       var res = sut.GetWebSdkConfig();
 
       res.Should()
-         .Be(@"{""truCodeUrl"": ""https://jones.net"",""relyingPartyId"": ""0f0348f0-46d6-47c9-ba4d-2e7cd7f82e3e""}");
+         .Be(@"{""truCodeUrl"": ""https://jones.net"",""relyingPartyId"": ""4ae21ae4-bfc6-4d90-9da2-64ce578344b3""}");
     }
 
     [Fact]
