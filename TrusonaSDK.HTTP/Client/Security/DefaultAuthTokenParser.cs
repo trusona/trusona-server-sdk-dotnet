@@ -22,8 +22,21 @@ namespace TrusonaSDK.HTTP.Client.Security
         return null;
       }
 
-      string decodedData = Encoding.UTF8.GetString(Convert.FromBase64String(parts[1]));
+      string decodedData = Encoding.UTF8.GetString(
+        Convert.FromBase64String(ensureBase64Padding(parts[1]))
+      );
+
       return JsonConvert.DeserializeObject<ParsedToken>(decodedData);
+    }
+
+    private string ensureBase64Padding(string input)
+    {
+      int mod4 = input.Length % 4;
+      if (mod4 > 0)
+      {
+        input += new string('=', 4 - mod4);
+      }
+      return input;
     }
   }
 }
