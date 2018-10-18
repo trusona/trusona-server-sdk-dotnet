@@ -34,6 +34,12 @@ namespace TrusonaSDK.API.Model
       internal set;
     }
 
+    public string EmailAddress
+    {
+      get;
+      internal set;
+    }
+
     public int DesiredLevel
     {
       get;
