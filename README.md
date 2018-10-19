@@ -250,6 +250,8 @@ if(result.IsSuccessful)
 }
 ```
 
+In some cases you may already know the user's identifier (i.e. in a multi-factor or step-up authentication scenario). This example shows how to issue a Trusonafication using the user's identifier.
+
 #### Creating an Essential Trusonafication, with the user's email
 
 A Relying Party that has a verified domain and uses the Trusona app will be able to trusonafy users based on their email address.
@@ -274,7 +276,6 @@ if(result.IsSuccessful)
 }
 ```
 
-In some cases you may already know the user's identifier (i.e. in a multi-factor or step-up authentication scenario). This example shows how to issue a Trusonafication using the user's identifier.
 
 #### Creating an Executive Trusonafication
 
