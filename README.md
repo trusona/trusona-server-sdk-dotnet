@@ -252,6 +252,8 @@ if(result.IsSuccessful)
 
 #### Creating an Essential Trusonafication, with the user's email
 
+A Relying Party that has a verified domain and uses the Trusona app will be able to trusonafy users based on their email address.
+
 ```csharp
 var trusona = new Trusona(
   token: "token",
