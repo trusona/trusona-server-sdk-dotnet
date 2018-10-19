@@ -53,6 +53,25 @@ namespace TrusonaSDK.API.Model
     }
 
     [Fact]
+    public void Essential_shold_be_valid_with_email_address()
+    {
+      var sut = Trusonafication.Essential()
+                               .EmailAddress("jones@taco.com")
+                               .Action("poop")
+                               .Resource("your pool")
+                               .Build();
+      //then
+      sut.DesiredLevel.Should().Be(2);
+      sut.DeviceIdentifier.Should().BeNull();
+      sut.EmailAddress.Should().Be("jones@taco.com");
+      sut.Action.Should().Be("poop");
+      sut.Resource.Should().Be("your pool");
+      sut.Prompt.Should().BeTrue();
+      sut.UserPresence.Should().BeTrue();
+      sut.ShowIdentityDocument.Should().BeFalse();
+    }
+
+    [Fact]
     public void Essential_shold_be_valid_with_finalize_options()
     {
       var sampleDate = DateTime.Now;
@@ -105,6 +124,25 @@ namespace TrusonaSDK.API.Model
       sut.DesiredLevel.Should().Be(3);
       sut.DeviceIdentifier.Should().BeNull();
       sut.UserIdentifier.Should().Be("jones");
+      sut.Action.Should().Be("poop");
+      sut.Resource.Should().Be("your pool");
+      sut.Prompt.Should().BeTrue();
+      sut.UserPresence.Should().BeTrue();
+      sut.ShowIdentityDocument.Should().BeTrue();
+    }
+
+    [Fact]
+    public void Executive_shold_be_valid_with_email_address()
+    {
+      var sut = Trusonafication.Executive()
+                               .EmailAddress("jones@taco.com")
+                               .Action("poop")
+                               .Resource("your pool")
+                               .Build();
+      //then
+      sut.DesiredLevel.Should().Be(3);
+      sut.DeviceIdentifier.Should().BeNull();
+      sut.EmailAddress.Should().Be("jones@taco.com");
       sut.Action.Should().Be("poop");
       sut.Resource.Should().Be("your pool");
       sut.Prompt.Should().BeTrue();

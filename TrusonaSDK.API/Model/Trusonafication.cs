@@ -34,6 +34,12 @@ namespace TrusonaSDK.API.Model
       internal set;
     }
 
+    public string EmailAddress
+    {
+      get;
+      internal set;
+    }
+
     public int DesiredLevel
     {
       get;
@@ -115,6 +121,13 @@ namespace TrusonaSDK.API.Model
       /// <returns>The next step required to finish building the trusonafication.</returns>
       /// <param name="userIdentifier">User identifier.</param>
       IActionStep UserIdentifier(String userIdentifier);
+
+      /// <summary>
+      /// Sets the user email address of the user to be authenticated.
+      /// </summary>
+      /// <returns>The next step required to finish building the trusonafication.</returns>
+      /// <param name="emailAddress">Email address.</param>
+      IActionStep EmailAddress(String emailAddress);
     }
 
     public interface IActionStep
@@ -215,6 +228,12 @@ namespace TrusonaSDK.API.Model
       public virtual IActionStep UserIdentifier(string userIdentifier)
       {
         _trusonafication.UserIdentifier = userIdentifier;
+        return this;
+      }
+
+      public IActionStep EmailAddress(string emailAddress)
+      {
+        _trusonafication.EmailAddress = emailAddress;
         return this;
       }
 

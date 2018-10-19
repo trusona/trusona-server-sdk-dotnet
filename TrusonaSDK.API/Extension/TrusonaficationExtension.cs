@@ -36,6 +36,9 @@ namespace TrusonaSDK.API
       }
       catch (TrusonaServiceException ex)
       {
+        if (ex.HttpResponse.StatusCode.Equals(422)) {
+          // TODO: Additional logic here?
+        }
         HandleServiceException(ex, DefaultErrorHandler);
         throw ex;
       }

@@ -20,6 +20,7 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
       1. [Creating an Essential Trusonafication, without user presence or a prompt](#creating-an-essential-trusonafication-without-user-presence-or-a-prompt)
       1. [Creating an Essential Trusonafication, with a TruCode](#creating-an-essential-trusonafication-with-a-trucode)
       1. [Creating an Essential Trusonafication, with the user's identifier](#creating-an-essential-trusonafication-with-the-users-identifier)
+      1. [Creating an Essential Trusonafication, with the user's email](#creating-an-essential-trusonafication-with-the-users-email)
       1. [Creating an Executive Trusonafication](#creating-an-executive-trusonafication)
       1. [Creating a Trusonafication for a Managed Trusona User](#creating-a-trusonafication-for-a-managed-trusona-user)
    1. [Using TruCode for device discovery](#using-trucode-for-device-discovery)
@@ -237,6 +238,30 @@ var trusona = new Trusona(
 
 var trusonafication = Trusonafication.Essential()
                                      .UserIdentifier("73CC202D-F866-4C72-9B43-9FCF5AF149BD")
+                                     .Action("login")
+                                     .Resource("Acme Bank")
+                                     .Build();
+
+var result = await trusona.CreateTrusonafication(trusonafication);
+
+if(result.IsSuccessful)
+{
+  // handle successful authentication
+}
+```
+
+#### Creating an Essential Trusonafication, with the user's email
+
+A Relying Party that has a verified domain and uses the Trusona app will be able to trusonafy users based on their email address.
+
+```csharp
+var trusona = new Trusona(
+  token: "token",
+  secret: "secret"
+);
+
+var trusonafication = Trusonafication.Essential()
+                                     .EmailAddress("email@example.com")
                                      .Action("login")
                                      .Resource("Acme Bank")
                                      .Build();
