@@ -307,6 +307,8 @@ if(result.IsSuccessful)
 }
 ```
 
+Executive Trusonafications require the user to scan an identity document to authenticate. An identity document needs to be registered with the user's account using the Trusona Mobile SDKs before the user can accept an Executive Trusonafication, and they must scan the same document they registered at the time of Trusonafication. Like Essential, both the prompt and user presence features can be used and are enabled by default, but they can be turned off independently by calling `withoutPrompt` or `withoutUserPresence`, respectively.
+
 #### Creating a Trusonafication for a Managed Trusona User
 
 For users who may be using the Trusona mobile app for iOS or Android, you may send those users Trusonafications by providing one of their
