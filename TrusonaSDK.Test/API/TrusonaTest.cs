@@ -72,8 +72,8 @@ namespace TrusonaSDK.API
       //given
       var trusonafication = Trusonafication.Essential()
                                            .DeviceIdentifier("blah")
-                                           .Action("poop")
-                                           .Resource("your pool")
+                                           .Action("sit")
+                                           .Resource("your lap")
                                            .Build();
 
       SetupMock(@"{
@@ -97,8 +97,8 @@ namespace TrusonaSDK.API
       //given
       var trusonafication = Trusonafication.Essential()
                                            .DeviceIdentifier("blah")
-                                           .Action("poop")
-                                           .Resource("your pool")
+                                           .Action("sit")
+                                           .Resource("your lap")
                                            .Build();
 
       SetupMock(string.Empty, HttpStatusCode.BadRequest);

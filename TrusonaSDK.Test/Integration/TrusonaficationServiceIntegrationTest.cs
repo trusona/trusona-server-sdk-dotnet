@@ -22,8 +22,8 @@ namespace TrusonaSDK.Integration
       //given
       var trusonafication = Trusonafication.Essential()
                                            .DeviceIdentifier("Z-GgoO2julAOEjJ2KqH34K24B0m-K6Rvx0uQqgv2nxU")
-                                           .Action("poop")
-                                           .Resource("your pool")
+                                           .Action("sit")
+                                           .Resource("your lap")
                                            .ExpiresAt(DateTime.Now.AddSeconds(10))
                                            .Build();
 
@@ -43,8 +43,8 @@ namespace TrusonaSDK.Integration
       //given
       var trusonafication = Trusonafication.Essential()
                                            .DeviceIdentifier("Z-GgoO2julAOEjJ2KqH34K24B0m-K6Rvx0uQqgv2nxU")
-                                           .Action("poop")
-                                           .Resource("your pool")
+                                           .Action("sit")
+                                           .Resource("your lap")
                                            .ExpiresAt(DateTime.Now.AddSeconds(1))
                                            .Build();
 
