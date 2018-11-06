@@ -158,7 +158,6 @@ namespace TrusonaSDK.API
       return new MapperConfiguration(cfg =>
       {
         cfg.CreateMap<Trusonafication, TrusonaficationRequest>();
-        cfg.CreateMap<ManagedUserTrusonafication, TrusonaficationRequest>();
         cfg.CreateMap<TrusonaficationResponse, TrusonaficationResult>();
         cfg.CreateMap<TruCodeResponse, TruCode>();
         cfg.CreateMap<UserDeviceResponse, UserDevice>();

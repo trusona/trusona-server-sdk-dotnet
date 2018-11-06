@@ -22,7 +22,6 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
       1. [Creating an Essential Trusonafication, with the user's identifier](#creating-an-essential-trusonafication-with-the-users-identifier)
       1. [Creating an Essential Trusonafication, with the user's email](#creating-an-essential-trusonafication-with-the-users-email)
       1. [Creating an Executive Trusonafication](#creating-an-executive-trusonafication)
-      1. [Creating a Trusonafication for a Managed Trusona User](#creating-a-trusonafication-for-a-managed-trusona-user)
    1. [Using TruCode for device discovery](#using-trucode-for-device-discovery)
    1. [Retrieving identity documents](#retrieving-identity-documents)
       1. [Retrieving all identity documents for a user](#retrieving-all-identity-documents-for-a-user)
@@ -261,7 +260,7 @@ by specifying their email address. This is the case if one of the following is t
 - You have an agreement with Trusona allowing you to send Trusonafications to any email address.
 
 Creating a Trusonafication with an email address is similar to the other
-use cases, except you use the `emailAddress()` method rather than `userIdentifier()` or `deviceIdentifier()`.
+use cases, except you use the `EmailAddress()` method rather than `UserIdentifier()` or `DeviceIdentifier()`.
 
 ```csharp
 var trusona = new Trusona(
@@ -298,33 +297,6 @@ var trusonafication = Trusonafication.Executive()
                                      .Action("login")
                                      .Resource("Acme Bank")
                                      .Build();
-
-var result = await trusona.CreateTrusonafication(trusonafication);
-
-if(result.IsSuccessful)
-{
-  // handle successful authentication
-}
-```
-
-#### Creating a Trusonafication for a Managed Trusona User
-
-For users who may be using the Trusona mobile app for iOS or Android, you may send those users Trusonafications by providing one of their
-pre-registered and verified emails.
-
-To create an Executive Trusonafication, call the `Executive` method initially instead of `Essential`.
-
-```csharp
-var trusona = new Trusona(
-  token: "token",
-  secret: "secret"
-);
-
-var trusonafication = ManagedUserTrusonafication.Essential()
-                                                .Email("jones@acmebank.com")
-                                                .Action("login")
-                                                .Resource("Acme Bank")
-                                                .Build();
 
 var result = await trusona.CreateTrusonafication(trusonafication);
 

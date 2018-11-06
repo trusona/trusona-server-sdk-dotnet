@@ -57,26 +57,5 @@ namespace TrusonaSDK.Integration
          .Should()
          .Be(TrusonaficationStatus.EXPIRED);
     }
-
-    //[Fact]
-    [Trait("Category", "Integration")]
-    public void CreateTrusonafication_should_return_a_valid_resonse_when_managed_user()
-    {
-      //given
-      var trusonafication = ManagedUserTrusonafication.Essential()
-                                           .Email("d@trusona.com")
-                                           .Action("poop")
-                                           .Resource("your pool")
-                                           .ExpiresAt(DateTime.Now.AddSeconds(1))
-                                           .Build();
-
-      //when
-      var res = sut.CreateTrusonafication(trusonafication).Result;
-
-      //then
-      res.Status
-         .Should()
-         .Be(TrusonaficationStatus.EXPIRED);
-    }
   }
 }

@@ -45,39 +45,7 @@ namespace TrusonaSDK.API
     }
 
     /// <summary>
-    /// Creates a Trusonafication and returns a TrusonaficationResult.
-    /// This will block until the Trusonafication is no longer IN_PROGRESS
-    /// </summary>
-    /// <returns>A TrusonaficationResult describing the current status of the Trusonafication.</returns>
-    /// <param name="trusona">Trusona API.</param>
-    /// <param name="trusonafication">A ManagedUserTrusonafication.</param>
-    public static async Task<TrusonaficationResult> CreateTrusonafication(this Trusona trusona, ManagedUserTrusonafication trusonafication)
-    {
-      try
-      {
-        var response = await trusona.TrusonaficationService.CreateTrusonaficationAsync(
-          trusona.mapper.Map<TrusonaficationRequest>(trusonafication));
-
-        var result = trusona.mapper.Map<TrusonaficationResult>(response);
-
-        while (TrusonaficationStatus.IN_PROGRESS == result.Status)
-        {
-          Thread.Sleep(trusona.pollingInterval);
-          response = await trusona.TrusonaficationService.GetTrusonaficationAsync(result.Id);
-          result = trusona.mapper.Map<TrusonaficationResult>(response);
-        }
-
-        return result;
-      }
-      catch (TrusonaServiceException ex)
-      {
-        HandleServiceException(ex, DefaultErrorHandler);
-        throw ex;
-      }
-    }
-
-    /// <summary>
-    /// Gets a TrusonaficationResult for a given Trusonafication ID. 
+    /// Gets a TrusonaficationResult for a given Trusonafication ID.
     /// This will block until the Trusonafication is no longer IN_PROGRESS
     /// </summary>
     /// <returns>A TrusonaficationResult</returns>
