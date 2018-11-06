@@ -79,14 +79,12 @@ namespace TrusonaSDK.API.Model
                                .UserIdentifier("jones")
                                .Action("poop")
                                .Resource("your pool")
-                               .CallbackUrl("https://earl.grey.com")
                                .ExpiresAt(sampleDate)
                                .WithoutPrompt()
                                .WithoutUserPresence()
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(1);
-      sut.CallbackUrl.Should().Be("https://earl.grey.com");
       sut.ExpiresAt.Should().Be(sampleDate.ToUniversalTime());
       sut.Prompt.Should().BeFalse();
       sut.UserPresence.Should().BeFalse();
@@ -158,14 +156,12 @@ namespace TrusonaSDK.API.Model
                                .UserIdentifier("jones")
                                .Action("poop")
                                .Resource("your pool")
-                               .CallbackUrl("https://earl.grey.com")
                                .ExpiresAt(sampleDate)
                                .WithoutPrompt()
                                .WithoutUserPresence()
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(3);
-      sut.CallbackUrl.Should().Be("https://earl.grey.com");
       sut.ExpiresAt.Should().Be(sampleDate.ToUniversalTime());
       sut.Prompt.Should().BeFalse();
       sut.UserPresence.Should().BeFalse();
