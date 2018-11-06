@@ -161,13 +161,15 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -185,15 +187,17 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .WithoutUserPresence()
-                                     .WithoutPrompt()
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .WithoutUserPresence()
+                             .WithoutPrompt()
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -211,13 +215,15 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .TruCode(Guid.Parse("37086D01-9EF6-4B57-8592-1276C58B1C4D"))
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .TruCode(Guid.Parse("37086D01-9EF6-4B57-8592-1276C58B1C4D"))
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -235,13 +241,15 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .UserIdentifier("73CC202D-F866-4C72-9B43-9FCF5AF149BD")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .UserIdentifier("73CC202D-F866-4C72-9B43-9FCF5AF149BD")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -268,13 +276,15 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .EmailAddress("email@example.com")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .EmailAddress("email@example.com")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -292,13 +302,15 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Executive()
-                                     .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Executive()
+                             .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
