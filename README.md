@@ -22,7 +22,6 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
       1. [Creating an Essential Trusonafication, with the user's identifier](#creating-an-essential-trusonafication-with-the-users-identifier)
       1. [Creating an Essential Trusonafication, with the user's email](#creating-an-essential-trusonafication-with-the-users-email)
       1. [Creating an Executive Trusonafication](#creating-an-executive-trusonafication)
-      1. [Creating a Trusonafication for a Managed Trusona User](#creating-a-trusonafication-for-a-managed-trusona-user)
    1. [Using TruCode for device discovery](#using-trucode-for-device-discovery)
    1. [Retrieving identity documents](#retrieving-identity-documents)
       1. [Retrieving all identity documents for a user](#retrieving-all-identity-documents-for-a-user)
@@ -162,13 +161,15 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -186,15 +187,17 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .WithoutUserPresence()
-                                     .WithoutPrompt()
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .WithoutUserPresence()
+                             .WithoutPrompt()
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -212,13 +215,15 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .TruCode(Guid.Parse("37086D01-9EF6-4B57-8592-1276C58B1C4D"))
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .TruCode(Guid.Parse("37086D01-9EF6-4B57-8592-1276C58B1C4D"))
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -226,7 +231,7 @@ if(result.IsSuccessful)
 }
 ```
 
-In this example, instead of specifying a device identifier, you can provide an ID for a TruCode that was scanned by the Trusona Mobile SDK. This will create a Trusonafication for the device that scanned the TruCode. See [Using TruCode for device discovery](#useing-trucode-for-device-discovery) below for more information on using TruCodes.
+In this example, instead of specifying a device identifier, you can provide an ID for a TruCode that was scanned by the Trusona Mobile SDK. This will create a Trusonafication for the device that scanned the TruCode. See [Using TruCode for device discovery](#using-trucode-for-device-discovery) below for more information on using TruCodes.
 
 #### Creating an Essential Trusonafication, with the user's identifier
 
@@ -236,13 +241,15 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Essential()
-                                     .UserIdentifier("73CC202D-F866-4C72-9B43-9FCF5AF149BD")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Essential()
+                             .UserIdentifier("73CC202D-F866-4C72-9B43-9FCF5AF149BD")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
@@ -254,6 +261,28 @@ In some cases you may already know the user's identifier (i.e. in a multi-factor
 
 #### Creating an Essential Trusonafication, with the user's email
 
+```csharp
+var trusona = new Trusona(
+  token: "token",
+  secret: "secret"
+);
+
+var request = Trusonafication.Essential()
+                             .EmailAddress("email@example.com")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
+
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
+
+if(result.IsSuccessful)
+{
+  // handle successful authentication
+}
+```
+
 In some cases you may be able to send a Trusonafication to a user
 by specifying their email address. This is the case if one of the following is true:
 
@@ -261,27 +290,7 @@ by specifying their email address. This is the case if one of the following is t
 - You have an agreement with Trusona allowing you to send Trusonafications to any email address.
 
 Creating a Trusonafication with an email address is similar to the other
-use cases, except you use the `emailAddress()` method rather than `userIdentifier()` or `deviceIdentifier()`.
-
-```csharp
-var trusona = new Trusona(
-  token: "token",
-  secret: "secret"
-);
-
-var trusonafication = Trusonafication.Essential()
-                                     .EmailAddress("email@example.com")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
-
-var result = await trusona.CreateTrusonafication(trusonafication);
-
-if(result.IsSuccessful)
-{
-  // handle successful authentication
-}
-```
+use cases, except you use the `EmailAddress()` method rather than `UserIdentifier()` or `DeviceIdentifier()`.
 
 #### Creating an Executive Trusonafication
 
@@ -293,46 +302,23 @@ var trusona = new Trusona(
   secret: "secret"
 );
 
-var trusonafication = Trusonafication.Executive()
-                                     .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
-                                     .Action("login")
-                                     .Resource("Acme Bank")
-                                     .Build();
+var request = Trusonafication.Executive()
+                             .DeviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
 
-var result = await trusona.CreateTrusonafication(trusonafication);
+var trusonafication = await trusona.CreateTrusonafication(request);
 
-if(result.IsSuccessful)
-{
-  // handle successful authentication
-}
-```
-
-#### Creating a Trusonafication for a Managed Trusona User
-
-For users who may be using the Trusona mobile app for iOS or Android, you may send those users Trusonafications by providing one of their
-pre-registered and verified emails.
-
-To create an Executive Trusonafication, call the `Executive` method initially instead of `Essential`.
-
-```csharp
-var trusona = new Trusona(
-  token: "token",
-  secret: "secret"
-);
-
-var trusonafication = ManagedUserTrusonafication.Essential()
-                                                .Email("jones@acmebank.com")
-                                                .Action("login")
-                                                .Resource("Acme Bank")
-                                                .Build();
-
-var result = await trusona.CreateTrusonafication(trusonafication);
+var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
   // handle successful authentication
 }
 ```
+
+Executive Trusonafications require the user to scan an identity document to authenticate. An identity document needs to be registered with the user's account using the Trusona Mobile SDKs before the user can accept an Executive Trusonafication, and they must scan the same document they registered at the time of Trusonafication. Like Essential, both the prompt and user presence features can be used and are enabled by default, but they can be turned off independently by calling `withoutPrompt` or `withoutUserPresence`, respectively.
 
 ##### Trusonafication Builder Options
 
@@ -341,14 +327,14 @@ if(result.IsSuccessful)
 | `DeviceIdentifier`    |    N[^1] |  none   | The identifier as generated by the Trusona Mobile SDK.                                           |
 | `TruCode`             |    N[^1] |  none   | The ID for a Trucode scanned by the Trusona Mobile SDK.                                          |
 | `UserIdentifier`      |    N[^1] |  none   | The identifier of the user that was registered to a device.                                      |
+| `EmailAddress`        |    N[^1] |  none   | The email address of the user that was registered to a device.                                   |
 | `Action`              |    Y     |  none   | The action being verified by the Trusonafication. (e.g. 'login', 'verify')                       |
 | `Resource`            |    Y     |  none   | The resource being acted upon by the user. (e.g. 'website', 'account')                           |
-| `CallbackUrl`         |    N     |  null   | A callback URL that is called by the Trusona API when the Trusonafication has been completed.    |
 | `ExpiresAt`           |    N     |  null   | An ISO-8601 UTC date that sets the expiration time of the Trusonafication.                       |
 | `WithoutUserPresence` |    N     |  false  | Removes the requirement for the user to demonstrate presence when accepting the Trusonafication. |
 | `WithoutPrompt`       |    N     |  false  | Removes the requirement for the user to explicityly "Accept" or "Reject" the Trusonafication.    |
 
-[^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `DeviceIdentifier`, `TruCode`, and `UserIdentifier`.
+[^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `DeviceIdentifier`, `TruCode`, `UserIdentifier`, and `EmailAddress`.
 
 ### Using TruCode for device discovery
 

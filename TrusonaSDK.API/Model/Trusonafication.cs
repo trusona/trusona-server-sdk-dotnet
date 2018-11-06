@@ -70,12 +70,6 @@ namespace TrusonaSDK.API.Model
       internal set;
     }
 
-    public string CallbackUrl
-    {
-      get;
-      internal set;
-    }
-
     public bool UserPresence
     {
       get;
@@ -168,14 +162,6 @@ namespace TrusonaSDK.API.Model
       IFinalizeStep WithoutUserPresence();
 
       /// <summary>
-      /// Sets the url to call when this trusonafication has either been accepted or rejected. 
-      /// Trusonafications that expire will not invoke the callback URL.
-      /// </summary>
-      /// <returns>The next step required to finish building the trusonafication.</returns>
-      /// <param name="callbackUrl">Callback URL.</param>
-      IFinalizeStep CallbackUrl(string callbackUrl);
-
-      /// <summary>
       /// Sets the time when this authentication request should expire. It cannot be responded to after it expires.
       /// </summary>
       /// <returns>The next step required to finish building the trusonafication.</returns>
@@ -260,12 +246,6 @@ namespace TrusonaSDK.API.Model
       #endregion
 
       #region FinalizeStep
-
-      public virtual IFinalizeStep CallbackUrl(string callbackUrl)
-      {
-        _trusonafication.CallbackUrl = callbackUrl;
-        return this;
-      }
 
       public virtual IFinalizeStep ExpiresAt(DateTime expiresAt)
       {

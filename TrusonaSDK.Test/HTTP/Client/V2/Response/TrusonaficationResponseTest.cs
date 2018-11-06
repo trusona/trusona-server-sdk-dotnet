@@ -24,7 +24,6 @@ namespace TrusonaSDK.HTTP.Client.V2.Response
       Action = "partay",
       Resource = "your hauz",
       ExpiresAt = DateTime.Parse("2018-01-23T23:28:47Z").ToUniversalTime(),
-      CallbackUrl = "https://kid-and-play.com/",
       UserPresence = false,
       Prompt = false,
       Result = new TrusonaficationResultResponse()
@@ -37,7 +36,6 @@ namespace TrusonaSDK.HTTP.Client.V2.Response
 
     public override string Json => @"{
   ""action"": ""partay"",
-  ""callback_url"": ""https://kid-and-play.com/"",
   ""created_at"": ""2018-01-23T23:28:45Z"",
   ""desired_level"": 2,
   ""device_identifier"": ""datDevice"",

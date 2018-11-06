@@ -21,7 +21,6 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
     public string Action { get; set; }
     public string Resource { get; set; }
     public DateTime? ExpiresAt { get; set; }
-    public string CallbackUrl { get; set; }
     public bool UserPresence { get; set; }
     public bool Prompt { get; set; }
     public bool ShowIdentityDocument { get; set; }

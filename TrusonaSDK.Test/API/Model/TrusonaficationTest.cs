@@ -19,15 +19,15 @@ namespace TrusonaSDK.API.Model
     {
       var sut = Trusonafication.Essential()
                                .DeviceIdentifier("someDevice")
-                               .Action("poop")
-                               .Resource("your pool")
+                               .Action("sit")
+                               .Resource("your lap")
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(2);
       sut.DeviceIdentifier.Should().Be("someDevice");
       sut.UserIdentifier.Should().BeNull();
-      sut.Action.Should().Be("poop");
-      sut.Resource.Should().Be("your pool");
+      sut.Action.Should().Be("sit");
+      sut.Resource.Should().Be("your lap");
       sut.Prompt.Should().BeTrue();
       sut.UserPresence.Should().BeTrue();
       sut.ShowIdentityDocument.Should().BeFalse();
@@ -38,15 +38,15 @@ namespace TrusonaSDK.API.Model
     {
       var sut = Trusonafication.Essential()
                                .UserIdentifier("jones")
-                               .Action("poop")
-                               .Resource("your pool")
+                               .Action("sit")
+                               .Resource("your lap")
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(2);
       sut.DeviceIdentifier.Should().BeNull();
       sut.UserIdentifier.Should().Be("jones");
-      sut.Action.Should().Be("poop");
-      sut.Resource.Should().Be("your pool");
+      sut.Action.Should().Be("sit");
+      sut.Resource.Should().Be("your lap");
       sut.Prompt.Should().BeTrue();
       sut.UserPresence.Should().BeTrue();
       sut.ShowIdentityDocument.Should().BeFalse();
@@ -57,15 +57,15 @@ namespace TrusonaSDK.API.Model
     {
       var sut = Trusonafication.Essential()
                                .EmailAddress("jones@taco.com")
-                               .Action("poop")
-                               .Resource("your pool")
+                               .Action("sit")
+                               .Resource("your lap")
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(2);
       sut.DeviceIdentifier.Should().BeNull();
       sut.EmailAddress.Should().Be("jones@taco.com");
-      sut.Action.Should().Be("poop");
-      sut.Resource.Should().Be("your pool");
+      sut.Action.Should().Be("sit");
+      sut.Resource.Should().Be("your lap");
       sut.Prompt.Should().BeTrue();
       sut.UserPresence.Should().BeTrue();
       sut.ShowIdentityDocument.Should().BeFalse();
@@ -77,16 +77,14 @@ namespace TrusonaSDK.API.Model
       var sampleDate = DateTime.Now;
       var sut = Trusonafication.Essential()
                                .UserIdentifier("jones")
-                               .Action("poop")
-                               .Resource("your pool")
-                               .CallbackUrl("https://earl.grey.com")
+                               .Action("sit")
+                               .Resource("your lap")
                                .ExpiresAt(sampleDate)
                                .WithoutPrompt()
                                .WithoutUserPresence()
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(1);
-      sut.CallbackUrl.Should().Be("https://earl.grey.com");
       sut.ExpiresAt.Should().Be(sampleDate.ToUniversalTime());
       sut.Prompt.Should().BeFalse();
       sut.UserPresence.Should().BeFalse();
@@ -98,15 +96,15 @@ namespace TrusonaSDK.API.Model
     {
       var sut = Trusonafication.Executive()
                                .DeviceIdentifier("someDevice")
-                               .Action("poop")
-                               .Resource("your pool")
+                               .Action("sit")
+                               .Resource("your lap")
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(3);
       sut.DeviceIdentifier.Should().Be("someDevice");
       sut.UserIdentifier.Should().BeNull();
-      sut.Action.Should().Be("poop");
-      sut.Resource.Should().Be("your pool");
+      sut.Action.Should().Be("sit");
+      sut.Resource.Should().Be("your lap");
       sut.Prompt.Should().BeTrue();
       sut.UserPresence.Should().BeTrue();
       sut.ShowIdentityDocument.Should().BeTrue();
@@ -117,15 +115,15 @@ namespace TrusonaSDK.API.Model
     {
       var sut = Trusonafication.Executive()
                                .UserIdentifier("jones")
-                               .Action("poop")
-                               .Resource("your pool")
+                               .Action("sit")
+                               .Resource("your lap")
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(3);
       sut.DeviceIdentifier.Should().BeNull();
       sut.UserIdentifier.Should().Be("jones");
-      sut.Action.Should().Be("poop");
-      sut.Resource.Should().Be("your pool");
+      sut.Action.Should().Be("sit");
+      sut.Resource.Should().Be("your lap");
       sut.Prompt.Should().BeTrue();
       sut.UserPresence.Should().BeTrue();
       sut.ShowIdentityDocument.Should().BeTrue();
@@ -136,15 +134,15 @@ namespace TrusonaSDK.API.Model
     {
       var sut = Trusonafication.Executive()
                                .EmailAddress("jones@taco.com")
-                               .Action("poop")
-                               .Resource("your pool")
+                               .Action("sit")
+                               .Resource("your lap")
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(3);
       sut.DeviceIdentifier.Should().BeNull();
       sut.EmailAddress.Should().Be("jones@taco.com");
-      sut.Action.Should().Be("poop");
-      sut.Resource.Should().Be("your pool");
+      sut.Action.Should().Be("sit");
+      sut.Resource.Should().Be("your lap");
       sut.Prompt.Should().BeTrue();
       sut.UserPresence.Should().BeTrue();
       sut.ShowIdentityDocument.Should().BeTrue();
@@ -156,16 +154,14 @@ namespace TrusonaSDK.API.Model
       var sampleDate = DateTime.Now;
       var sut = Trusonafication.Executive()
                                .UserIdentifier("jones")
-                               .Action("poop")
-                               .Resource("your pool")
-                               .CallbackUrl("https://earl.grey.com")
+                               .Action("sit")
+                               .Resource("your lap")
                                .ExpiresAt(sampleDate)
                                .WithoutPrompt()
                                .WithoutUserPresence()
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(3);
-      sut.CallbackUrl.Should().Be("https://earl.grey.com");
       sut.ExpiresAt.Should().Be(sampleDate.ToUniversalTime());
       sut.Prompt.Should().BeFalse();
       sut.UserPresence.Should().BeFalse();
