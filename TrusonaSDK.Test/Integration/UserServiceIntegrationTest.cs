@@ -22,8 +22,9 @@ namespace TrusonaSDK.Test.Integration
     {
       //given
       var userIdentifier = "abc123";
-      var deviceIdentifier = "kC_9iF_CNcJqdU4PvJspx6okdQnxJsYNteL0EJG_O-c";
-      sut.CreateUserDevice(userIdentifier, deviceIdentifier).Wait();
+      var deviceIdentifier = "YPhZzRDf9tW0Mtla2rj3NRz2OmYD4k88fiD7t0OFuyQ";
+      var binding = sut.CreateUserDevice(userIdentifier, deviceIdentifier).Result;
+      sut.ActivateUserDevice(binding.ActivationCode).Wait();
 
       //when
       Action action = () => { sut.DeleteUser(userIdentifier).Wait(); };

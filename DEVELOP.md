@@ -1,5 +1,28 @@
 # Development
 
+## Running the integration tests
+
+Grab the TruBank Server token and secret for UAT from 1password.
+
+```bash
+export TRUSONA_TOKEN=<token>
+export TRUSONA_SECRET=<secret>
+```
+
+In your IDE/editor, find all places where we've commented out the `[Fact]` annotation and uncomment them
+
+From the root of the project, run:
+
+```bash
+dotnet test TrusonaSDK.Test
+```
+
+Don't forget to re-comment out the tests:
+
+```bash
+git checkout -- .
+```
+
 ## Releasing
 
 ### Bumping the version
