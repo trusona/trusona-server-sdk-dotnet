@@ -7,12 +7,11 @@
 // Copyright (c) 2018 Trusona, Inc.
 using System;
 using AutoMapper;
+using TrusonaSDK.API.Configuration;
 using TrusonaSDK.API.Model;
 using System.Net;
-using TrusonaSDK.HTTP;
 using TrusonaSDK.HTTP.Client.V2.Request;
 using TrusonaSDK.HTTP.Client.V2.Service;
-using TrusonaSDK.HTTP.Environment;
 using TrusonaSDK.HTTP.Client;
 using TrusonaSDK.HTTP.Client.V2.Response;
 
@@ -44,7 +43,7 @@ namespace TrusonaSDK.API
     /// <param name="secret">Secret.</param>
     /// <param name="environment">Environment.</param>
     public Trusona(string token, string secret, TrusonaEnvironment environment = defaultEnv)
-      : this(new ServiceFactory(GetEnvironment(environment, token, secret)))
+      : this(new ServiceFactory(new ConfigurationFactory().GetConfiguration(environment, token, secret)))
     { }
 
     internal Trusona(ServiceFactory serviceFactory)
@@ -138,19 +137,6 @@ namespace TrusonaSDK.API
       errorHandler?.Invoke(serviceException.HttpResponse.StatusCode, serviceException.RequestId);
       throw new TrusonaException("A network related error occurred. You should double check that you can connect to Trusona and try your request again",
         serviceException);
-    }
-
-    private static IEnvironment GetEnvironment(TrusonaEnvironment environment, string token, string secret)
-    {
-      switch (environment)
-      {
-        case TrusonaEnvironment.UAT:
-          return new UATEnvironment(token, secret);
-
-        case TrusonaEnvironment.PRODUCTION:
-        default:
-          return new ProductionEnvironment(token, secret);
-      }
     }
 
     private static MapperConfiguration ConfigureMapper()

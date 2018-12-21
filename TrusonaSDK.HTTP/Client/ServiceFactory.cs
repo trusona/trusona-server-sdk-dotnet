@@ -26,20 +26,20 @@ namespace TrusonaSDK.HTTP.Client
 
     #region Private Fields
 
-    private readonly IEnvironment _environment;
+    private readonly IConfiguration _configuration;
     private readonly IHttpClientWrapper _clientWrapper;
 
     #endregion
 
     #region Constructors
 
-    public ServiceFactory(IEnvironment environment)
-      : this(environment, defaultClientWrapper)
+    public ServiceFactory(IConfiguration configuration)
+      : this(configuration, defaultClientWrapper)
     { }
 
-    public ServiceFactory(IEnvironment environment, IHttpClientWrapper clientWrapper)
+    public ServiceFactory(IConfiguration configuration, IHttpClientWrapper clientWrapper)
     {
-      this._environment = environment;
+      this._configuration = configuration;
       this._clientWrapper = clientWrapper;
     }
 
@@ -56,7 +56,7 @@ namespace TrusonaSDK.HTTP.Client
     {
       return (T)Activator.CreateInstance(
         typeof(T),
-        _environment,
+        _configuration,
         clientWrapper);
     }
 

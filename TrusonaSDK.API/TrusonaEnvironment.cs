@@ -11,6 +11,8 @@ namespace TrusonaSDK.API
   public enum TrusonaEnvironment
   {
     PRODUCTION,
-    UAT
+    UAT,
+    AP_PRODUCTION,
+    AP_UAT
   }
 }
