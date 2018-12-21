@@ -14,7 +14,6 @@
     <Folder Include="Client\V2\Service\" />
     <Folder Include="Client\V2\Serialization\" />
     <Folder Include="Client\Interceptor\" />
-    <Folder Include="Environment\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
