@@ -140,7 +140,7 @@ namespace TrusonaSDK.API
         serviceException);
     }
 
-    private static IEnvironment GetEnvironment(TrusonaEnvironment environment, string token, string secret)
+    private static Configuration GetEnvironment(TrusonaEnvironment environment, string token, string secret)
     {
       switch (environment)
       {

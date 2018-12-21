@@ -7,7 +7,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
   {
     private readonly ICredentialProvider _credentialProvider;
 
-    public UserService(IEnvironment environment, IHttpClientWrapper clientWrapper)
+    public UserService(Configuration environment, IHttpClientWrapper clientWrapper)
       : base(new RequestResponseJsonConverter(), clientWrapper, environment.EndpointUrl)
     {
       this._credentialProvider = environment.CredentialProvider;

@@ -8,7 +8,7 @@
 using System;
 namespace TrusonaSDK.HTTP.Environment
 {
-  public class UATEnvironment : ProductionEnvironment, IEnvironment
+  public class UATEnvironment : ProductionEnvironment, Configuration
   {
     private static readonly Uri uatEndpointUrl = new Uri("https://api.staging.trusona.net");
 

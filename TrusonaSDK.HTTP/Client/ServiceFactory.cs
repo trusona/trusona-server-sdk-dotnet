@@ -26,18 +26,18 @@ namespace TrusonaSDK.HTTP.Client
 
     #region Private Fields
 
-    private readonly IEnvironment _environment;
+    private readonly Configuration _environment;
     private readonly IHttpClientWrapper _clientWrapper;
 
     #endregion
 
     #region Constructors
 
-    public ServiceFactory(IEnvironment environment)
+    public ServiceFactory(Configuration environment)
       : this(environment, defaultClientWrapper)
     { }
 
-    public ServiceFactory(IEnvironment environment, IHttpClientWrapper clientWrapper)
+    public ServiceFactory(Configuration environment, IHttpClientWrapper clientWrapper)
     {
       this._environment = environment;
       this._clientWrapper = clientWrapper;

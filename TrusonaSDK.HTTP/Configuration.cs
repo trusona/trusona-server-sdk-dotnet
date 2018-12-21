@@ -1,5 +1,5 @@
 ﻿//
-// IEnvironmentConfiguration.cs
+// Configuration.cs
 //
 // Author:
 //       David Kopack <d@trusona.com>
@@ -8,7 +8,7 @@
 using System;
 namespace TrusonaSDK.HTTP
 {
-  public interface IEnvironment
+  public interface Configuration
   {
     Uri EndpointUrl { get; }
     ICredentialProvider CredentialProvider { get; }

@@ -14,15 +14,15 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
 {
   public sealed class TruCodeService : HttpService, ITruCodeService
   {
-    private readonly IEnvironment _environment;
+    private readonly Configuration _environment;
     private readonly IHttpClientWrapper _clientWrapper;
     private readonly ICredentialProvider _credentialProvider;
 
-    public TruCodeService(IEnvironment environment, IHttpClientWrapper clientWrapper)
+    public TruCodeService(Configuration environment, IHttpClientWrapper clientWrapper)
       : this(environment, clientWrapper, environment.EndpointUrl)
     { }
 
-    private TruCodeService(IEnvironment environment, IHttpClientWrapper clientWrapper, Uri endpointUri)
+    private TruCodeService(Configuration environment, IHttpClientWrapper clientWrapper, Uri endpointUri)
       : base(new RequestResponseJsonConverter(), clientWrapper, endpointUri)
     {
       this._environment = environment;
