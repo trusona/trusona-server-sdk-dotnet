@@ -27,6 +27,7 @@
 	  <Folder Include="Test\" />
 	  <Folder Include="Exception\" />
 	  <Folder Include="Extension\" />
+	  <Folder Include="Configuration\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\TrusonaSDK.HTTP\TrusonaSDK.HTTP.csproj" />

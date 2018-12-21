@@ -28,6 +28,7 @@
     <Folder Include="HTTP\Client\Interceptor\" />
     <Folder Include="Integration\" />
     <Folder Include="API\Model\" />
+    <Folder Include="API\Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrusonaSDK.API\TrusonaSDK.API.csproj" />
