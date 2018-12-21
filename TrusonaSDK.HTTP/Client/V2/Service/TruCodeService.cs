@@ -14,20 +14,20 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
 {
   public sealed class TruCodeService : HttpService, ITruCodeService
   {
-    private readonly Configuration _environment;
+    private readonly IConfiguration _configuration;
     private readonly IHttpClientWrapper _clientWrapper;
     private readonly ICredentialProvider _credentialProvider;
 
-    public TruCodeService(Configuration environment, IHttpClientWrapper clientWrapper)
-      : this(environment, clientWrapper, environment.EndpointUrl)
+    public TruCodeService(IConfiguration configuration, IHttpClientWrapper clientWrapper)
+      : this(configuration, clientWrapper, configuration.EndpointUrl)
     { }
 
-    private TruCodeService(Configuration environment, IHttpClientWrapper clientWrapper, Uri endpointUri)
+    private TruCodeService(IConfiguration configuration, IHttpClientWrapper clientWrapper, Uri endpointUri)
       : base(new RequestResponseJsonConverter(), clientWrapper, endpointUri)
     {
-      this._environment = environment;
+      this._configuration = configuration;
       this._clientWrapper = clientWrapper;
-      this._credentialProvider = environment.CredentialProvider;
+      this._credentialProvider = configuration.CredentialProvider;
     }
 
     public TruCodeResponse GetPairedTrucode(Guid trucodeId)

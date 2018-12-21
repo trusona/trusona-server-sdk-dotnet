@@ -44,7 +44,7 @@ namespace TrusonaSDK.API
     /// <param name="secret">Secret.</param>
     /// <param name="environment">Environment.</param>
     public Trusona(string token, string secret, TrusonaEnvironment environment = defaultEnv)
-      : this(new ServiceFactory(GetEnvironment(environment, token, secret)))
+      : this(new ServiceFactory(GetConfiguration(environment, token, secret)))
     { }
 
     internal Trusona(ServiceFactory serviceFactory)
@@ -140,7 +140,7 @@ namespace TrusonaSDK.API
         serviceException);
     }
 
-    private static Configuration GetEnvironment(TrusonaEnvironment environment, string token, string secret)
+    private static IConfiguration GetConfiguration(TrusonaEnvironment environment, string token, string secret)
     {
       switch (environment)
       {

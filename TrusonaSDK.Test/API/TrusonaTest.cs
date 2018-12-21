@@ -24,7 +24,7 @@ namespace TrusonaSDK.API
     #region Mock Setup
     const string validToken = "eyJraWQiOiI3ZDM0ODY2Yy1hZGNjLTRhNjAtYTJjZC1jMTc3MjZlMGExNTgiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI0YWUyMWFlNC1iZmM2LTRkOTAtOWRhMi02NGNlNTc4MzQ0YjMiLCJuYmYiOjE1Mzg2NzI3NDYsImF0aCI6IlJPTEVfVFJVU1RFRF9SUCIsImlzcyI6InRzOmY5ODM4NTU3LTk2N2MtNGM4Yi1iNmE1LTU0NmExZmUyM2Q5OCIsImV4cCI6MTg1NDI0MjI2NiwiaWF0IjoxNTM4NjcyNzQ2LCJqdGkiOiJhOGJjNGUxMi0yMmI2LTQwZmItOTUzOC04OTVkNmVhN2Y2ZjEifQ.ebEafr0MXn9vOKwZzb1LK2mIR8ZkmHQallUygZZt1qySXMXpwbZ56pvuEr0MKxzzfTSTQK2DapTSls76dzWmHqZiDVbav4Y7p5GbglZah62-B0RUBmVk6R4qlSJ-EdIndwM_PO2lCZNfPef-UpCZrRACM-uzQTTm5MooHZpp3CIHGWefIsv2tyZ1UFCEOIXElGe1a11Rcd69TH4NbVNqghqcbUzzc-5ScC9v3tR7FJQdrIRg93ZRrd19PwF1jjvY_SGYPJnAQ-XUhE6e4YCjYP2Prlh6iBViozeXA-27EpRxj-DZfieQnkze6VsKQUmRAsoNpk84ttPD2O6CBGZ1zQ";
 
-    readonly Mock<Configuration> _mockEnvironment;
+    readonly Mock<IConfiguration> _mockConfiguration;
     readonly Mock<IHttpClientWrapper> _mockHttpClient;
     readonly ServiceFactory _serviceFactory;
 
@@ -32,16 +32,16 @@ namespace TrusonaSDK.API
 
     public TrusonaTest()
     {
-      this._mockEnvironment = new Mock<Configuration>();
+      this._mockConfiguration = new Mock<IConfiguration>();
 
-      _mockEnvironment.Setup(x => x.EndpointUrl)
+      _mockConfiguration.Setup(x => x.EndpointUrl)
                 .Returns(new Uri("https://jones.net"));
 
-      _mockEnvironment.Setup(x => x.CredentialProvider)
+      _mockConfiguration.Setup(x => x.CredentialProvider)
                       .Returns(new ApiCredentials(validToken, "jones"));
 
       this._mockHttpClient = new Mock<IHttpClientWrapper>();
-      this._serviceFactory = new ServiceFactory(_mockEnvironment.Object, _mockHttpClient.Object);
+      this._serviceFactory = new ServiceFactory(_mockConfiguration.Object, _mockHttpClient.Object);
       this.sut = TestTrusonaFactory.InjectServiceFactory(_serviceFactory);
     }
 

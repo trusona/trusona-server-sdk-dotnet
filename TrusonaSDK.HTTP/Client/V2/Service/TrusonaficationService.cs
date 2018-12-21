@@ -17,10 +17,10 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
   {
     private readonly ICredentialProvider _credentialProvider;
 
-    public TrusonaficationService(Configuration environment, IHttpClientWrapper clientWrapper)
-      : base(new RequestResponseJsonConverter(), clientWrapper, environment.EndpointUrl)
+    public TrusonaficationService(IConfiguration configuration, IHttpClientWrapper clientWrapper)
+      : base(new RequestResponseJsonConverter(), clientWrapper, configuration.EndpointUrl)
     {
-      this._credentialProvider = environment.CredentialProvider;
+      this._credentialProvider = configuration.CredentialProvider;
     }
 
     public TrusonaficationResponse CreateTrusonafication(TrusonaficationRequest request)

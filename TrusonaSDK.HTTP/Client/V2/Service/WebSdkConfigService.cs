@@ -16,14 +16,14 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
   {
     private readonly ICredentialProvider _credentialProvider;
     private readonly IAuthTokenParser _authTokenParser;
-    private readonly Configuration _environment;
+    private readonly IConfiguration _configuration;
 
-    public WebSdkConfigService(Configuration environment, IHttpClientWrapper clientWrapper)
-      : base(new RequestResponseJsonConverter(), clientWrapper, environment.EndpointUrl)
+    public WebSdkConfigService(IConfiguration configuration, IHttpClientWrapper clientWrapper)
+      : base(new RequestResponseJsonConverter(), clientWrapper, configuration.EndpointUrl)
     {
-      this._credentialProvider = environment.CredentialProvider;
+      this._credentialProvider = configuration.CredentialProvider;
       this._authTokenParser = new DefaultAuthTokenParser();
-      this._environment = environment;
+      this._configuration = configuration;
     }
 
     public string GetWebSdkConfig()
@@ -36,7 +36,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
 
       IDictionary<string, object> configParams = new Dictionary<string, object>()
       {
-        { "truCodeUrl", _environment.EndpointUrl },
+        { "truCodeUrl", _configuration.EndpointUrl },
         { "relyingPartyId", parsedToken.Subject }
       };
 

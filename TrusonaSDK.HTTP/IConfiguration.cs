@@ -8,7 +8,7 @@
 using System;
 namespace TrusonaSDK.HTTP
 {
-  public interface Configuration
+  public interface IConfiguration
   {
     Uri EndpointUrl { get; }
     ICredentialProvider CredentialProvider { get; }

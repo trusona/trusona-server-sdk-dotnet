@@ -7,10 +7,10 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
   {
     private readonly ICredentialProvider _credentialProvider;
 
-    public UserService(Configuration environment, IHttpClientWrapper clientWrapper)
-      : base(new RequestResponseJsonConverter(), clientWrapper, environment.EndpointUrl)
+    public UserService(IConfiguration configuration, IHttpClientWrapper clientWrapper)
+      : base(new RequestResponseJsonConverter(), clientWrapper, configuration.EndpointUrl)
     {
-      this._credentialProvider = environment.CredentialProvider;
+      this._credentialProvider = configuration.CredentialProvider;
     }
 
     public void DeleteUser(string userIdentifier)

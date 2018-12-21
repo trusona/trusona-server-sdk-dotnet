@@ -8,7 +8,7 @@
 using System;
 namespace TrusonaSDK.HTTP.Environment
 {
-  public class ProductionEnvironment : Configuration
+  public class ProductionEnvironment : IConfiguration
   {
     #region Private Fields
 
