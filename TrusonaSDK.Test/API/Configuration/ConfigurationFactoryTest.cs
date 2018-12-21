@@ -24,6 +24,7 @@ namespace TrusonaSDK.Test.API.Configuration
     [InlineData(null, "https://api.trusona.net/")]
     [InlineData(TrusonaEnvironment.PRODUCTION, "https://api.trusona.net/")]
     [InlineData(TrusonaEnvironment.UAT, "https://api.staging.trusona.net/")]
+    [InlineData(TrusonaEnvironment.AP_PRODUCTION, "https://api.ap.trusona.net/")]
     public void GetConfiguration_should_set_endpoint_based_on_environment(TrusonaEnvironment environment, string expectedUrl)
     {
       var res = sut.GetConfiguration(environment, null, null);

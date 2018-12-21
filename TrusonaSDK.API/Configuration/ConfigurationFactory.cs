@@ -15,6 +15,7 @@ namespace TrusonaSDK.API.Configuration
   {
     private static readonly string PRODUCTION_ENDPOINT = "https://api.trusona.net";
     private static readonly string UAT_ENDPOINT = "https://api.staging.trusona.net";
+    private static readonly string AP_PRODUCTION_ENDPOINT = "https://api.ap.trusona.net/";
 
     public IConfiguration GetConfiguration(TrusonaEnvironment environment, string token, string secret)
     {
@@ -22,6 +23,9 @@ namespace TrusonaSDK.API.Configuration
       {
         case TrusonaEnvironment.UAT:
           return new Configuration(UAT_ENDPOINT, token, secret);
+
+        case TrusonaEnvironment.AP_PRODUCTION:
+          return new Configuration(AP_PRODUCTION_ENDPOINT, token, secret);
 
         case TrusonaEnvironment.PRODUCTION:
         default:
