@@ -18,8 +18,10 @@ namespace TrusonaSDK.API.Configuration
     {
       { TrusonaEnvironment.PRODUCTION, "https://api.trusona.net" },
       { TrusonaEnvironment.UAT, "https://api.staging.trusona.net"},
-      { TrusonaEnvironment.AP_PRODUCTION, "https://api.ap.trusona.net/"},
-      { TrusonaEnvironment.AP_UAT, "https://api.staging.ap.trusona.net/"}
+      { TrusonaEnvironment.AP_PRODUCTION, "https://api.ap.trusona.net"},
+      { TrusonaEnvironment.AP_UAT, "https://api.staging.ap.trusona.net"},
+      { TrusonaEnvironment.EU_PRODUCTION, "https://api.eu.trusona.net"},
+      { TrusonaEnvironment.EU_UAT, "https://api.staging.eu.trusona.net"}
     };
 
     public IConfiguration GetConfiguration(TrusonaEnvironment environment, string token, string secret)
