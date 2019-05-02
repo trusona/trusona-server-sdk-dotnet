@@ -26,6 +26,8 @@ namespace TrusonaSDK.Test.API.Configuration
     [InlineData(TrusonaEnvironment.UAT, "https://api.staging.trusona.net/")]
     [InlineData(TrusonaEnvironment.AP_PRODUCTION, "https://api.ap.trusona.net/")]
     [InlineData(TrusonaEnvironment.AP_UAT, "https://api.staging.ap.trusona.net/")]
+    [InlineData(TrusonaEnvironment.EU_UAT, "https://api.staging.eu.trusona.net/")]
+    [InlineData(TrusonaEnvironment.EU_PRODUCTION, "https://api.eu.trusona.net/")]
     public void GetConfiguration_should_set_endpoint_based_on_environment(TrusonaEnvironment environment, string expectedUrl)
     {
       var res = sut.GetConfiguration(environment, null, null);
@@ -34,7 +36,8 @@ namespace TrusonaSDK.Test.API.Configuration
     }
 
     [Fact]
-    public void GetConfiguration_should_set_the_token() {
+    public void GetConfiguration_should_set_the_token()
+    {
       var res = sut.GetConfiguration(TrusonaEnvironment.UAT, "token", null);
 
       res.CredentialProvider.Token.Should().Be("token");

@@ -13,6 +13,8 @@ namespace TrusonaSDK.API
     PRODUCTION,
     UAT,
     AP_PRODUCTION,
-    AP_UAT
+    AP_UAT,
+    EU_PRODUCTION,
+    EU_UAT
   }
 }
