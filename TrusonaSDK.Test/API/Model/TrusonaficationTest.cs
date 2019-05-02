@@ -15,7 +15,7 @@ namespace TrusonaSDK.API.Model
   public class TrusonaficationTest
   {
     [Fact]
-    public void Essential_shold_be_valid_with_device_identifier()
+    public void Essential_should_be_valid_with_device_identifier()
     {
       var sut = Trusonafication.Essential()
                                .DeviceIdentifier("someDevice")
@@ -34,7 +34,7 @@ namespace TrusonaSDK.API.Model
     }
 
     [Fact]
-    public void Essential_shold_be_valid_with_user_identifier()
+    public void Essential_should_be_valid_with_user_identifier()
     {
       var sut = Trusonafication.Essential()
                                .UserIdentifier("jones")
@@ -53,7 +53,7 @@ namespace TrusonaSDK.API.Model
     }
 
     [Fact]
-    public void Essential_shold_be_valid_with_email_address()
+    public void Essential_should_be_valid_with_email_address()
     {
       var sut = Trusonafication.Essential()
                                .EmailAddress("jones@taco.com")
@@ -72,7 +72,7 @@ namespace TrusonaSDK.API.Model
     }
 
     [Fact]
-    public void Essential_shold_be_valid_with_finalize_options()
+    public void Essential_should_be_valid_with_finalize_options()
     {
       var sampleDate = DateTime.Now;
       var sut = Trusonafication.Essential()
@@ -92,7 +92,7 @@ namespace TrusonaSDK.API.Model
     }
 
     [Fact]
-    public void Executive_shold_be_valid_with_device_identifier()
+    public void Executive_should_be_valid_with_device_identifier()
     {
       var sut = Trusonafication.Executive()
                                .DeviceIdentifier("someDevice")
@@ -111,7 +111,7 @@ namespace TrusonaSDK.API.Model
     }
 
     [Fact]
-    public void Executive_shold_be_valid_with_user_identifier()
+    public void Executive_should_be_valid_with_user_identifier()
     {
       var sut = Trusonafication.Executive()
                                .UserIdentifier("jones")
@@ -130,7 +130,7 @@ namespace TrusonaSDK.API.Model
     }
 
     [Fact]
-    public void Executive_shold_be_valid_with_email_address()
+    public void Executive_should_be_valid_with_email_address()
     {
       var sut = Trusonafication.Executive()
                                .EmailAddress("jones@taco.com")
@@ -149,7 +149,7 @@ namespace TrusonaSDK.API.Model
     }
 
     [Fact]
-    public void Executive_shold_be_valid_with_finalize_options()
+    public void Executive_should_be_valid_with_finalize_options()
     {
       var sampleDate = DateTime.Now;
       var sut = Trusonafication.Executive()

@@ -117,7 +117,8 @@ namespace TrusonaSDK.API
       //given
       SetupMock(@"{
         ""id"": ""96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"",
-        ""status"": ""ACCEPTED""
+        ""status"": ""ACCEPTED"",
+        ""user_identifier"": ""deprecated-identifier""
       }");
 
       //when
@@ -128,6 +129,32 @@ namespace TrusonaSDK.API
          .Be(Guid.Parse("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"));
       res.Status.Should()
          .Be(TrusonaficationStatus.ACCEPTED);
+      res.UserIdentifier.Should()
+         .Be("deprecated-identifier");
+    }
+
+    [Fact]
+    public void GetTrusonaficationResult_should_include_bound_user_identifier_if_present()
+    {
+      //given
+      SetupMock(@"{
+        ""id"": ""96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"",
+        ""status"": ""ACCEPTED"",
+        ""result"": {
+          ""bound_user_identifier"": ""registered-identifier""
+        }
+      }");
+
+      //when
+      var res = sut.GetTrusonaficationResult(Guid.Parse("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9")).Result;
+
+      //then
+      res.Id.Should()
+         .Be(Guid.Parse("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"));
+      res.Status.Should()
+         .Be(TrusonaficationStatus.ACCEPTED);
+      res.BoundUserIdentifier.Should()
+         .Be("registered-identifier");
     }
 
     [Fact]

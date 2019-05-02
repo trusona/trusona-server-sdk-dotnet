@@ -57,5 +57,22 @@ namespace TrusonaSDK.Integration
          .Should()
          .Be(TrusonaficationStatus.EXPIRED);
     }
+
+    //[Fact]
+    [Trait("Category", "Integration")]
+    public void GetTrusonaficationResult_of_an_accepted_trusonafication_should_include_the_bound_identifier()
+    {
+      //given
+      var trusonaficationId = Guid.Parse("ff339d22-da88-48d5-ac8c-7efcfa082700");
+
+      //when
+      var res = sut.GetTrusonaficationResult(trusonaficationId).Result;
+
+      res.Status.Should()
+         .Be(TrusonaficationStatus.ACCEPTED);
+      res.BoundUserIdentifier.Should()
+         .Be("mr.t");
+    }
+
   }
 }

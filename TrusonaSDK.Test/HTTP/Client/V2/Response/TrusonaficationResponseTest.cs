@@ -30,7 +30,8 @@ namespace TrusonaSDK.HTTP.Client.V2.Response
       {
         Id = Guid.Parse("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f8"),
         Accepted = true,
-        AcceptedLevel = 2
+        AcceptedLevel = 2,
+        BoundUserIdentifier = "registered-identifier"
       }
     };
 
@@ -45,6 +46,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Response
   ""resource"": ""your hauz"",
   ""result"": {
     ""accepted_level"": 2,
+    ""bound_user_identifier"": ""registered-identifier"",
     ""id"": ""96ea5830-8e5e-42c5-9cbb-8a941d2ff7f8"",
     ""is_accepted"": true
   },

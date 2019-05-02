@@ -38,6 +38,7 @@ namespace TrusonaSDK.API.Model
     /// result method before granting access to the user.
     /// </summary>
     /// <value>The user identifier.</value>
+    [Obsolete("UserIdentifier is deprecated, use the BoundUserIdentifier field.")]
     public string UserIdentifier
     {
       get;
@@ -45,6 +46,18 @@ namespace TrusonaSDK.API.Model
     }
 
     /// <summary>
+    /// The identifier of the user that accepted the authentication request. Will not be populated if the
+    /// user rejects or fails to complete the authentication challenge.
+    /// </summary>
+    /// <value>The user identifier that was previously registered, or <c>null</c> if the user has not
+    /// been registered.</value>
+    /// <summary>
+    public string BoundUserIdentifier
+    {
+      get;
+      internal set;
+    }
+
     /// Returns true if the user met or exceeded the security requirements of the authentication request.
     /// Otherwise, returns false.
     /// </summary>
