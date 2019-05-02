@@ -16,5 +16,6 @@ namespace TrusonaSDK.HTTP.Client.V2.Response
     [JsonProperty("is_accepted")]
     public bool Accepted { get; set; }
     public int AcceptedLevel { get; set; }
+    public String BoundUserIdentifier { get; set; }
   }
 }
