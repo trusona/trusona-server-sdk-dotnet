@@ -45,7 +45,7 @@ The Server SDK requires API credentials that are used by the SDK to identify and
 
 The two credentials required by the SDK include a `token` and `secret`. Both are strings generated and distributed by Trusona.
 
-*NOTE:* The `token` and `secret` should not be shared with anyone. They are how you authenticate to the Trusona services, and you should not check them into source control.
+**NOTE:** The `token` and `secret` should not be shared with anyone. They are how you authenticate to the Trusona services, and you should not check them into source control.
 
 
 ## NuGet Artifactory Setup
@@ -84,7 +84,7 @@ Alternatively, you may also search for the NuGet package using Visual Studio. Be
 
 The `Trusona` class is the main class you will interact with to talk to the Trusona APIs. It can be created with the `token` and `secret` provided by [Trusona](#server-sdk-api-credentials).
 
-*NOTE:* The `token` and `secret` should not be shared with anyone. They are how you authenticate to the Trusona services, and you should not check them into source control.
+**NOTE:** The `token` and `secret` should not be shared with anyone. They are how you authenticate to the Trusona services, and you should not check them into source control.
 
 ```csharp
 var trusona = new Trusona(
@@ -152,7 +152,9 @@ If the request is successful, the device is ready to be Trusonafied.
 
 ### Creating Trusonafications
 
-Once a device is bound to a user, that user can be Trusonafied using the device identifier obtained from the Trusona Mobile SDK.
+Once a device is bound to a user, that user can be Trusonafied using the device identifier obtained from the Trusona Mobile SDK. The `userIdentifier` that was used to bind the user to the device will be returned in the `BoundUserIdentifier` field if the authentication request is successfully accepted by the user.
+
+**NOTE:** if the user is using the Trusona mobile app and attempts to authenticate with your system prior to being registered, the `BoundUserIdentifier` field will be `null`. The user's identifier will need to be regiserted in this case.
 
 #### Creating an Essential Trusonafication
 
@@ -174,6 +176,7 @@ var result = await trusona.GetTrusonaficationResult(trusonafication.Id);
 
 if(result.IsSuccessful)
 {
+  var userIdentifier = result.BoundUserIdentifier;
   // handle successful authentication
 }
 ```
