@@ -74,5 +74,26 @@ namespace TrusonaSDK.Integration
          .Be("mr.t");
     }
 
+    //[Fact]
+    [Trait("Category", "Integration")]
+    public void Send_trusonafication_by_email_should_work()
+    {
+      //given
+      var trusonafication = Trusonafication.Essential()
+                                           .EmailAddress("<your UAT email address>")
+                                           .Action("sit")
+                                           .Resource("your lap")
+                                           .ExpiresAt(DateTime.Now.AddSeconds(10))
+                                           .Build();
+
+      //when
+      var res = sut.CreateTrusonafication(trusonafication).Result;
+
+      //then
+      res.Status
+         .Should()
+         .Be(TrusonaficationStatus.IN_PROGRESS);
+    }
+
   }
 }
