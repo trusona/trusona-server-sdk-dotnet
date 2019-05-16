@@ -17,7 +17,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
       DeviceIdentifier = "datDevice",
       UserIdentifier = "datUser",
       TruCodeId = "3827D5E5-B6C1-49F8-865E-72794D10BEF4",
-      Email = "jones@tacos.com",
+      EmailAddress = "jones@tacos.com",
       DesiredLevel = 2,
       Action = "partay",
       Resource = "yourhauz",
