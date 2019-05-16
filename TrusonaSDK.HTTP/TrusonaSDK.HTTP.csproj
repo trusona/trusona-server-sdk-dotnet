@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ReleaseVersion>1.0.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>trusona-sdk-http.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Client\" />
