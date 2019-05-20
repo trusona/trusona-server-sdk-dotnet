@@ -13,7 +13,7 @@ namespace TrusonaSDK.Integration
 {
   public class DeviceServiceIntegrationTest : IntegrationServiceTest
   {
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void GetDevice_should_return_a_valid_response()
     {

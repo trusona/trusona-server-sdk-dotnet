@@ -15,7 +15,7 @@ namespace TrusonaSDK.Integration
 {
   public class TrusonaficationServiceIntegrationTest : IntegrationServiceTest
   {
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void CreateTrusonafication_should_return_a_valid_resonse()
     {
@@ -36,7 +36,7 @@ namespace TrusonaSDK.Integration
          .Be(TrusonaficationStatus.IN_PROGRESS);
     }
 
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void GetTrusonaficationResult_should_return_a_valid_response()
     {
@@ -58,7 +58,7 @@ namespace TrusonaSDK.Integration
          .Be(TrusonaficationStatus.EXPIRED);
     }
 
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void GetTrusonaficationResult_of_an_accepted_trusonafication_should_include_the_bound_identifier()
     {

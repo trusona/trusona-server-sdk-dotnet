@@ -20,7 +20,7 @@ namespace TrusonaSDK.Test.Integration
 
     // Uses historical UAT data where there is a user with Trusona ID = 699882827 and TruBank ID = taco
 
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void CreateUserBinding_should_be_able_to_create_binding_when_trucode_paired_with_trusona_id()
     {
@@ -39,7 +39,7 @@ namespace TrusonaSDK.Test.Integration
       action.Should().NotThrow();
     }
 
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void CreateUserBinding_should_be_able_to_create_binding_when_trucode_paired_with_device_identifier()
     {
@@ -58,7 +58,7 @@ namespace TrusonaSDK.Test.Integration
       action.Should().NotThrow();
     }
 
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void CreateUserBinding_should_throw_validation_exception_if_user_identifier_is_blank()
     {
@@ -76,7 +76,7 @@ namespace TrusonaSDK.Test.Integration
       action.Should().Throw<ValidationException>();
     }
 
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void CreateUserBinding_should_throw_validation_exception_if_trucode_id_is_blank()
     {
@@ -90,7 +90,7 @@ namespace TrusonaSDK.Test.Integration
       action.Should().Throw<ValidationException>();
     }
 
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void CreateUserBinding_should_throw_user_already_bound_exception_if_user_identifier_is_different()
     {
@@ -109,7 +109,7 @@ namespace TrusonaSDK.Test.Integration
       action.Should().Throw<UserAlreadyBoundException>();
     }
 
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void CreateUserBinding_should_throw_trucode_not_paried_exception_when_trucode_is_not_paired()
     {

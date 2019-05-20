@@ -16,7 +16,7 @@ namespace TrusonaSDK.Test.Integration
 {
   public class UserServiceIntegrationTest : IntegrationServiceTest
   {
-    //[Fact]
+    [Fact]
     [Trait("Category", "Integration")]
     public void DeleteUser_should_return_a_valid_response()
     {
