@@ -53,9 +53,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       var message = new HttpRequestMessage()
       {
         Method = HttpMethod.Get,
-        RequestUri = new FluentUrlBuilder(_endpointUrl)
-          .AppendPath(resource)
-          .AppendPath(id)
+        RequestUri = MemberUrl(resource, id)
           .AppendQueryParams(queryParams)
       };
 
@@ -80,8 +78,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       var message = new HttpRequestMessage()
       {
         Method = HttpMethod.Post,
-        RequestUri = new FluentUrlBuilder(_endpointUrl)
-          .AppendPath(resource),
+        RequestUri = CollectionUrl(resource),
         Content = new StringContent(
           content: _serializer.SerializeRequest(content),
           encoding: Encoding.UTF8,
@@ -111,9 +108,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       var message = new HttpRequestMessage()
       {
         Method = new HttpMethod("PATCH"),
-        RequestUri = new FluentUrlBuilder(_endpointUrl)
-          .AppendPath(resource)
-          .AppendPath(id),
+        RequestUri = MemberUrl(resource, id),
         Content = new StringContent(
           content: _serializer.SerializeRequest(content),
           encoding: Encoding.UTF8,
@@ -140,10 +135,8 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       var message = new HttpRequestMessage
       {
         Method = new HttpMethod("DELETE"),
-        RequestUri = new FluentUrlBuilder(_endpointUrl)
-          .AppendPath(resource)
-          .AppendPath(id)
-        };
+        RequestUri = MemberUrl(resource, id)
+      };
       var response = await _clientWrapper.HandleRequest(message, credentialProvider);
 
       try
@@ -170,6 +163,16 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
         return null;
       }
       return headerValues.First();
+    }
+
+    private FluentUrlBuilder CollectionUrl(string resource)
+    {
+      return new FluentUrlBuilder(_endpointUrl).AppendPath(resource);
+    }
+
+    private FluentUrlBuilder MemberUrl(string resource, string id)
+    {
+      return CollectionUrl(resource).AppendPath(id);
     }
   }
 }
