@@ -20,43 +20,46 @@ namespace TrusonaSDK.Test.Integration
 
     // Uses historical UAT data where there is a user with Trusona ID = 699882827 and TruBank ID = taco
 
-    [Fact]
-    [Trait("Category", "Integration")]
-    public void CreateUserBinding_should_be_able_to_create_binding_when_trucode_paired_with_trusona_id()
-    {
-      //given
-      var truCodeIdentifier = "trusonaId:699882827";
-      var userIdentifier = "taco";
 
-      var truCodeService = new TruCodeService();
-      var truCode = truCodeService.CreateTruCode();
-      truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
+    // The first two tests won't work because we don't currently have a way to get a new unbound user in UAT for each test
 
-      //when
-      Action action = () => { sut.CreateUserBinding(userIdentifier, truCode["id"]).Wait(); };
+    //[Fact]
+    //[Trait("Category", "Integration")]
+    //public void CreateUserBinding_should_be_able_to_create_binding_when_trucode_paired_with_trusona_id()
+    //{
+    //  //given
+    //  var truCodeIdentifier = "trusonaId:699882827";
+    //  var userIdentifier = "taco";
 
-      //then
-      action.Should().NotThrow();
-    }
+    //  var truCodeService = new TruCodeService();
+    //  var truCode = truCodeService.CreateTruCode();
+    //  truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
 
-    [Fact]
-    [Trait("Category", "Integration")]
-    public void CreateUserBinding_should_be_able_to_create_binding_when_trucode_paired_with_device_identifier()
-    {
-      //given
-      var truCodeIdentifier = "tWTwlYLmffwSrXXKHcmA9kSQd0jMoQKislFsAKhX8DI";
-      var userIdentifier = "taco";
+    //  //when
+    //  Action action = () => { sut.CreateUserBinding(userIdentifier, truCode["id"]).Wait(); };
 
-      var truCodeService = new TruCodeService();
-      var truCode = truCodeService.CreateTruCode();
-      truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
+    //  //then
+    //  action.Should().NotThrow();
+    //}
 
-      //when
-      Action action = () => { sut.CreateUserBinding(userIdentifier, truCode["id"]).Wait(); };
+    //[Fact]
+    //[Trait("Category", "Integration")]
+    //public void CreateUserBinding_should_be_able_to_create_binding_when_trucode_paired_with_device_identifier()
+    //{
+    //  //given
+    //  var truCodeIdentifier = "tWTwlYLmffwSrXXKHcmA9kSQd0jMoQKislFsAKhX8DI";
+    //  var userIdentifier = "taco";
 
-      //then
-      action.Should().NotThrow();
-    }
+    //  var truCodeService = new TruCodeService();
+    //  var truCode = truCodeService.CreateTruCode();
+    //  truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
+
+    //  //when
+    //  Action action = () => { sut.CreateUserBinding(userIdentifier, truCode["id"]).Wait(); };
+
+    //  //then
+    //  action.Should().NotThrow();
+    //}
 
     [Fact]
     [Trait("Category", "Integration")]
@@ -92,11 +95,11 @@ namespace TrusonaSDK.Test.Integration
 
     [Fact]
     [Trait("Category", "Integration")]
-    public void CreateUserBinding_should_throw_user_already_bound_exception_if_user_identifier_is_different()
+    public void CreateUserBinding_should_throw_user_already_bound_exception_if_user_already_has_binding()
     {
       //given
       var truCodeIdentifier = "tWTwlYLmffwSrXXKHcmA9kSQd0jMoQKislFsAKhX8DI";
-      var userIdentifier = "tacoshrimp";
+      var userIdentifier = "taco";
 
       var truCodeService = new TruCodeService();
       var truCode = truCodeService.CreateTruCode();
