@@ -124,7 +124,26 @@ namespace TrusonaSDK.Test.Integration
       Action action = () => { sut.CreateUserBinding(userIdentifier, truCode["id"]).Wait(); };
 
       //then
-      action.Should().NotThrow();
+      action.Should().Throw<TruCodeNotPairedException>();
+    }
+
+    [Fact]
+    [Trait("Category", "Integration")]
+    public void CreateUserBinding_should_throw_trucode_not_paried_exception_when_trucode_is_paired_by_non_tilted_device()
+    {
+      //given
+      var truCodeIdentifier = "trusonaId:000000000"; // User won't exist
+      var userIdentifier = "taco";
+
+      var truCodeService = new TruCodeService();
+      var truCode = truCodeService.CreateTruCode();
+      truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
+
+      //when
+      Action action = () => { sut.CreateUserBinding(userIdentifier, truCode["id"]).Wait(); };
+
+      //then
+      action.Should().Throw<TruCodeNotPairedException>();
     }
   }
 }
