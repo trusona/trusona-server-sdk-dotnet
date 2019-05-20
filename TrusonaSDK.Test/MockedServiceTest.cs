@@ -24,6 +24,11 @@ namespace TrusonaSDK
 
     protected readonly T sut;
 
+    protected Mock<IHttpClientWrapper> MockHttpClient
+    {
+      get { return _mockHttpClient; }
+    }
+
     protected IHttpClientWrapper HttpClientWrapper
     {
       get { return _mockHttpClient.Object; }

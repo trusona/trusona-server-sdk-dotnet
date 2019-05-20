@@ -100,6 +100,33 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       }
     }
 
+    protected async Task Post(string resource,
+                              object content,
+                              ICredentialProvider credentialProvider = null)
+    {
+      var message = new HttpRequestMessage()
+      {
+        Method = HttpMethod.Post,
+        RequestUri = CollectionUrl(resource),
+        Content = new StringContent(
+          content: _serializer.SerializeRequest(content),
+          encoding: Encoding.UTF8,
+          mediaType: Headers.MEDIA_TYPE_JSON_VALUE
+        )
+      };
+
+      var response = await _clientWrapper.HandleRequest(message, credentialProvider);
+
+      try
+      {
+        response.EnsureSuccessStatusCode();
+      }
+      catch (HttpRequestException ex)
+      {
+        throw new TrusonaServiceException(ex, response, TryResolveRequestId(response));
+      }
+    }
+
     protected async Task<T> Patch<T>(string resource,
                                      object content,
                                      string id = null,
