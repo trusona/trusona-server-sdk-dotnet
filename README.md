@@ -15,6 +15,7 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
    1. [Registering devices with Trusona](#registering-devices-with-trusona)
       1. [Binding a device to a user](#binding-a-device-to-a-user)
       1. [Activating a device](#activating-a-device)
+   1. [Registering users using the Trusona app](#registering-users-using-the-trusona-app)
    1. [Creating Trusonafications](#creating-trusonafications)
       1. [Creating an Essential Trusonafication](#creating-an-essential-trusonafication)
       1. [Creating an Essential Trusonafication, without user presence or a prompt](#creating-an-essential-trusonafication-without-user-presence-or-a-prompt)
@@ -149,6 +150,31 @@ If the request is successful, the device is ready to be Trusonafied.
 | `DeviceNotFoundException` | Indicates that the request to activate the device failed because the device could not be found, most likely due to an invalid `activationCode`. |
 | `ValidationException`     | Indicates that the request to activate the device failed because the `activationCode` was blank.                                                |
 | `TrusonaException`        | Indicates that the request to activate the device failed, check the message to determine the reason.                                            |
+
+### Registering users using the Trusona app
+
+If your users are using the Trusona app, but the user identifier you use is not an email address, you can register their user identifiers with their Trusona account by creating a user binding. To create a user binding, you will need to:
+
+1. Have the user login to your system using their normal method.
+1. Once authenticated, use the Trusona Web SDK to display a secure QR code for them to scan.
+1. After they have scanned the secure QR code, you can send the scanned `truCodeId` to your backend system.
+1. Then use the server SDK to create a binding using the authenticated user's `userIdentifier` and the `truCodeId` that was scanned.
+
+The final step can be accomplished in the .NET SDK using the example code below:
+
+```csharp
+var trusona = new Trusona(
+  token: "token",
+  secret: "secret"
+);
+
+var userIdentifier = "<FROM YOUR INTERNAL SYSTEM>";
+var truCodeId = "<FROM THE TRUCODE WEB SDK>";
+
+await trusona.CreateUserBinding(userIdentifier: userIdentifier, truCodeId: truCodeId);
+```
+
+**NOTE:** It is recommended that you send a Trusonafication to the user after you create the binding, to confirm the binding has been created and to avoid the user getting stuck on the spinner that appears after scanning a TruCode.
 
 ### Creating Trusonafications
 
