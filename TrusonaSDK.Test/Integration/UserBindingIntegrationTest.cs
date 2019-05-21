@@ -4,7 +4,7 @@
 // Author:
 //       delduggel <>
 //
-// Copyright (c) 2019 
+// Copyright (c) 2019
 //
 //
 using FluentAssertions;
@@ -17,11 +17,10 @@ namespace TrusonaSDK.Test.Integration
 {
   public class UserBindingIntegrationTest : IntegrationServiceTest
   {
+    private readonly Buster buster = new Buster();
+    private readonly TruCodeService truCodeService = new TruCodeService();
 
     // Uses historical UAT data where there is a user with Trusona ID = 699882827 and TruBank ID = taco
-
-
-    // The first two tests won't work because we don't currently have a way to get a new unbound user in UAT for each test
 
     //[Fact]
     //[Trait("Category", "Integration")]
@@ -68,7 +67,6 @@ namespace TrusonaSDK.Test.Integration
       //given
       var truCodeIdentifier = "tWTwlYLmffwSrXXKHcmA9kSQd0jMoQKislFsAKhX8DI";
 
-      var truCodeService = new TruCodeService();
       var truCode = truCodeService.CreateTruCode();
       truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
 
@@ -98,12 +96,14 @@ namespace TrusonaSDK.Test.Integration
     public void CreateUserBinding_should_throw_user_already_bound_exception_if_user_already_has_binding()
     {
       //given
-      var truCodeIdentifier = "tWTwlYLmffwSrXXKHcmA9kSQd0jMoQKislFsAKhX8DI";
       var userIdentifier = "taco";
+      var deviceId = buster.CreateDevice()["id"];
+      var deviceBinding = sut.CreateUserDevice(userIdentifier, deviceId).Result;
+      sut.ActivateUserDevice(deviceBinding.ActivationCode).Wait();
 
-      var truCodeService = new TruCodeService();
       var truCode = truCodeService.CreateTruCode();
-      truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
+      Console.WriteLine(truCode["id"]);
+      truCodeService.PairTruCode(truCode["payload"], deviceId);
 
       //when
       Action action = () => { sut.CreateUserBinding(userIdentifier, truCode["id"]).Wait(); };
@@ -119,7 +119,6 @@ namespace TrusonaSDK.Test.Integration
       //given
       var userIdentifier = "taco";
 
-      var truCodeService = new TruCodeService();
       var truCode = truCodeService.CreateTruCode();
       //truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
 
@@ -138,7 +137,6 @@ namespace TrusonaSDK.Test.Integration
       var truCodeIdentifier = "trusonaId:000000000"; // User won't exist
       var userIdentifier = "taco";
 
-      var truCodeService = new TruCodeService();
       var truCode = truCodeService.CreateTruCode();
       truCodeService.PairTruCode(truCode["payload"], truCodeIdentifier);
 
