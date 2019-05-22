@@ -19,18 +19,24 @@ namespace TrusonaSDK.Integration
     public void GetDevice_should_return_a_valid_response()
     {
       //given
-      var deviceIdentifier = "kC_9iF_CNcJqdU4PvJspx6okdQnxJsYNteL0EJG_O-c";
+      var deviceIdentifier = buster.CreateDevice()["id"];
 
       //when
       var res = sut.GetDevice(deviceIdentifier).Result;
 
       //then
-      res.Active
-         .Should()
-         .BeTrue();
-      res.ActivatedAt.Value
-         .Should()
-         .Be(DateTime.Parse("2018-01-12 21:36:17.833"));
+      res.Active.Should().BeFalse();
+      res.ActivatedAt.Should().BeNull();
+
+      //when
+      var activationCode = sut.CreateUserDevice("userId", deviceIdentifier).Result.ActivationCode;
+      sut.ActivateUserDevice(activationCode).Wait();
+      res = sut.GetDevice(deviceIdentifier).Result;
+
+      //then
+      res.Active.Should().BeTrue();
+      res.ActivatedAt.Should().BeAfter(DateTime.UtcNow.AddSeconds(-5));
+      res.ActivatedAt.Should().BeBefore(DateTime.UtcNow.AddSeconds(5));
     }
   }
 }
