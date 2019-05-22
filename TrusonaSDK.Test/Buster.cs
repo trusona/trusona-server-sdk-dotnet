@@ -49,5 +49,35 @@ namespace TrusonaSDK.Test
       string responseBody = response.Content.ReadAsStringAsync().Result;
       return JsonConvert.DeserializeObject<IDictionary<string, string>>(responseBody);
     }
+
+    public IDictionary<string, string> SyncDevice(string id)
+    {
+      var response = client.GetAsync(string.Format("https://buster.staging.trusona.net/faux_devices/{0}", id)).Result;
+
+      response.EnsureSuccessStatusCode();
+
+      string responseBody = response.Content.ReadAsStringAsync().Result;
+      return JsonConvert.DeserializeObject<IDictionary<string, string>>(responseBody);
+    }
+
+    public IDictionary<string, string> AcceptTrusonafication(string id, string trusonaficationId)
+    {
+      var body = new Dictionary<string, string>() {
+        { "trusonafication_id", trusonaficationId }
+      };
+
+      var requestBody = new StringContent(
+        content: JsonConvert.SerializeObject(body),
+        encoding: Encoding.UTF8,
+        mediaType: Headers.MEDIA_TYPE_JSON_VALUE
+      );
+
+      var response = client.PostAsync(string.Format("https://buster.staging.trusona.net/faux_devices/{0}/trusonafication_responses", id), requestBody).Result;
+
+      response.EnsureSuccessStatusCode();
+
+      string responseBody = response.Content.ReadAsStringAsync().Result;
+      return JsonConvert.DeserializeObject<IDictionary<string, string>>(responseBody);
+    }
   }
 }
