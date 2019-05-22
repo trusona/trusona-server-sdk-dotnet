@@ -9,9 +9,10 @@ using System;
 using TrusonaSDK.API;
 using Xunit;
 using FluentAssertions;
+
 namespace TrusonaSDK.Integration
 {
-  public class DeviceServiceIntegrationTest : IntegrationTest
+  public class DeviceIntegrationTest : IntegrationTest
   {
     [Fact]
     [Trait("Category", "Integration")]
