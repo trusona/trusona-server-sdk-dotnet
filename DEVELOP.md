@@ -1,6 +1,6 @@
 # Development
 
-## Running the integration tests
+## Running the tests
 
 Grab the TruBank Server token and secret for UAT and Buster credentials from 1password.
 
@@ -23,6 +23,12 @@ Don't forget to re-comment out the tests:
 
 ```bash
 git checkout -- .
+```
+
+## Running just the unit tests
+
+```bash
+dotnet test TrusonaSDK.Test --filter Category!=Integration
 ```
 
 ## Releasing
