@@ -16,7 +16,8 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
     public string UserIdentifier { get; set; }
     [JsonProperty("trucode_id")]
     public string TruCodeId { get; set; }
-    public string Email { get; set; }
+    [JsonProperty("email")]
+    public string EmailAddress { get; set; }
     public int DesiredLevel { get; set; }
     public string Action { get; set; }
     public string Resource { get; set; }
