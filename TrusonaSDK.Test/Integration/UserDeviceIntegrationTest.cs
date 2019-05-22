@@ -62,5 +62,20 @@ namespace TrusonaSDK.Test.Integration
       action.Should().Throw<DeviceAlreadyBoundException>();
     }
 
+    [Fact]
+    [Trait("Category", "Integration")]
+    public void ActivateUserDevice_should_activate_the_device()
+    {
+      //given
+      var userIdentifier = "taco";
+      var deviceId = buster.CreateDevice()["id"];
+      var userDevice = sut.CreateUserDevice(userIdentifier, deviceId).Result;
+
+      //when
+      var active = sut.ActivateUserDevice(userDevice.ActivationCode).Result;
+
+      //then
+      active.Should().BeTrue();
+    }
   }
 }
