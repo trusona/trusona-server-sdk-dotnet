@@ -319,5 +319,57 @@ namespace TrusonaSDK.API
       // then
       action.Should().Throw<TrusonaException>();
     }
+
+    [Fact]
+    public void CreateUserBinding_should_return_no_content()
+    {
+      // given
+      SetupMock(statusCode: HttpStatusCode.NoContent);
+
+      // when
+      Action action = () => { sut.CreateUserBinding("foo", System.Guid.NewGuid().ToString()).Wait(); };
+
+      // then
+      action.Should().NotThrow();
+    }
+
+    [Fact]
+    public void CreateUserBinding_should_throw_error_on_422()
+    {
+      // given
+      SetupMock(statusCode: (HttpStatusCode)422);
+
+      // when
+      Action action = () => { sut.CreateUserBinding("foo", System.Guid.NewGuid().ToString()).Wait(); };
+
+      // then
+      action.Should().Throw<ValidationException>();
+    }
+
+    [Fact]
+    public void CreateUserBinding_should_throw_error_on_424()
+    {
+      // given
+      SetupMock(statusCode: (HttpStatusCode)424);
+
+      // when
+      Action action = () => { sut.CreateUserBinding("foo", System.Guid.NewGuid().ToString()).Wait(); };
+
+      // then
+      action.Should().Throw<TruCodeNotPairedException>();
+    }
+
+    [Fact]
+    public void CreateUserBinding_should_throw_error_on_409()
+    {
+      // given
+      SetupMock(statusCode: HttpStatusCode.Conflict);
+
+      // when
+      Action action = () => { sut.CreateUserBinding("foo", System.Guid.NewGuid().ToString()).Wait(); };
+
+      // then
+      action.Should().Throw<UserAlreadyBoundException>();
+    }
   }
 }

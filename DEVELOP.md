@@ -1,12 +1,14 @@
 # Development
 
-## Running the integration tests
+## Running the tests
 
-Grab the TruBank Server token and secret for UAT from 1password.
+Grab the TruBank Server token and secret for UAT and Buster credentials from 1password.
 
 ```bash
 export TRUSONA_TOKEN=<token>
 export TRUSONA_SECRET=<secret>
+export BUSTER_USERNAME=<un>
+export BUSTER_PASSWORD=<pw>
 ```
 
 In your IDE/editor, find all places where we've commented out the `[Fact]` annotation and uncomment them
@@ -21,6 +23,12 @@ Don't forget to re-comment out the tests:
 
 ```bash
 git checkout -- .
+```
+
+## Running just the unit tests
+
+```bash
+dotnet test TrusonaSDK.Test --filter Category!=Integration
 ```
 
 ## Releasing
