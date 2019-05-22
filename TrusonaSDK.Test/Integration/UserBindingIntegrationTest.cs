@@ -102,7 +102,6 @@ namespace TrusonaSDK.Test.Integration
       sut.ActivateUserDevice(deviceBinding.ActivationCode).Wait();
 
       var truCode = truCodeService.CreateTruCode();
-      Console.WriteLine(truCode["id"]);
       truCodeService.PairTruCode(truCode["payload"], deviceId);
 
       //when
