@@ -5,7 +5,7 @@ dotnet: 2.1.302
 script:
 - dotnet build -c debug
 - dotnet build -c release
-- dotnet test TrusonaSDK.Test
+- dotnet test TrusonaSDK.Test --filter Category!=Integration
 deploy:
 - provider: script
   script: "./publish.sh debug"
