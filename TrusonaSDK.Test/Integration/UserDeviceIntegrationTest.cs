@@ -14,10 +14,8 @@ using Xunit;
 
 namespace TrusonaSDK.Test.Integration
 {
-  public class UserDeviceIntegrationTest : IntegrationServiceTest
+  public class UserDeviceIntegrationTest : IntegrationTest
   {
-    private readonly Buster buster = new Buster();
-
     [Fact]
     [Trait("Category", "Integration")]
     public void CreateUserDevice_should_bind_a_user_to_an_inactive_device_and_include_an_activation_code()

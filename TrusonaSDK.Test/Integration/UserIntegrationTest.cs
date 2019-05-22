@@ -14,10 +14,8 @@ using FluentAssertions;
 
 namespace TrusonaSDK.Test.Integration
 {
-  public class UserIntegrationTest : IntegrationServiceTest
+  public class UserIntegrationTest : IntegrationTest
   {
-    private readonly Buster buster = new Buster();
-
     [Fact]
     [Trait("Category", "Integration")]
     public void DeleteUser_should_return_a_valid_response()

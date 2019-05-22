@@ -13,7 +13,7 @@ using TrusonaSDK.API.Model;
 
 namespace TrusonaSDK.Integration
 {
-  public class TrusonaficationServiceIntegrationTest : IntegrationServiceTest
+  public class TrusonaficationServiceIntegrationTest : IntegrationTest
   {
     [Fact]
     [Trait("Category", "Integration")]

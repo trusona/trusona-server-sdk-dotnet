@@ -5,17 +5,17 @@
 //       David Kopack <d@trusona.com>
 //
 // Copyright (c) 2018 Trusona, Inc.
-using System;
-using System.Linq;
 using TrusonaSDK.API;
+using TrusonaSDK.Test;
 
 namespace TrusonaSDK
 {
-  public abstract class IntegrationServiceTest
+  public abstract class IntegrationTest
   {
-    protected readonly TrusonaSDK.API.Trusona sut;
+    protected readonly Trusona sut;
+    protected readonly Buster buster;
 
-    protected IntegrationServiceTest()
+    protected IntegrationTest()
     {
       var environment = System.Environment.GetEnvironmentVariables();
       sut = new TrusonaSDK.API.Trusona(
@@ -23,6 +23,7 @@ namespace TrusonaSDK
         secret: (string)environment["TRUSONA_SECRET"],
         environment: TrusonaEnvironment.UAT
       );
+      buster = new Buster();
     }
   }
 }

@@ -15,9 +15,8 @@ using Xunit;
 
 namespace TrusonaSDK.Test.Integration
 {
-  public class UserBindingIntegrationTest : IntegrationServiceTest
+  public class UserBindingIntegrationTest : IntegrationTest
   {
-    private readonly Buster buster = new Buster();
     private readonly TruCodeService truCodeService = new TruCodeService();
 
     // Uses historical UAT data where there is a user with Trusona ID = 699882827 and TruBank ID = taco

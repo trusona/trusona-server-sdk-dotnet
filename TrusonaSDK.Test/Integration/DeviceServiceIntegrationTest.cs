@@ -11,7 +11,7 @@ using Xunit;
 using FluentAssertions;
 namespace TrusonaSDK.Integration
 {
-  public class DeviceServiceIntegrationTest : IntegrationServiceTest
+  public class DeviceServiceIntegrationTest : IntegrationTest
   {
     [Fact]
     [Trait("Category", "Integration")]
