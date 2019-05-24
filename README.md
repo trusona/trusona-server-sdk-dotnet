@@ -159,7 +159,7 @@ If your users are using the Trusona app, but the user identifier you use is not 
 1. Once authenticated, use the Trusona Web SDK to display a secure QR code for them to scan.
 1. After they have scanned the secure QR code, you can send the scanned `truCodeId` to your backend system.
 1. Then use the server SDK to create a binding using the authenticated user's `userIdentifier` and the `truCodeId` that was scanned.
-1. Create Trusonafication to confirm the `BoundUserIdentifier` matches what you expect and to avoid the user getting stuck on the spinner that appears after scanning a secure QR code.
+1. After the binding is successful, create a Trusonafication to finalize the process with the user.
 
 The final step can be accomplished in the .NET SDK using the example code below:
 
@@ -174,6 +174,8 @@ var truCodeId = "<FROM THE TRUCODE WEB SDK>";
 
 await trusona.CreateUserBinding(userIdentifier: userIdentifier, truCodeId: truCodeId);
 ```
+
+**NOTE:** Send a Trusonafication after binding the user identifier to confirm the `BoundUserIdentifier` matches what you expect and to avoid the user getting stuck on the spinner that appears after scanning a secure QR code.
 
 ### Creating Trusonafications
 
