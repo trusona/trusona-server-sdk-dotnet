@@ -174,7 +174,7 @@ var truCodeId = "<FROM THE TRUCODE WEB SDK>";
 await trusona.CreateUserBinding(userIdentifier: userIdentifier, truCodeId: truCodeId);
 ```
 
-**NOTE:** It is recommended that you send a Trusonafication to the user after you create the binding, to confirm the binding has been created and to avoid the user getting stuck on the spinner that appears after scanning a TruCode.
+**NOTE:** After the binding is successful, create Trusonafication to confirm the `BoundUserIdentifier` matches what you expect and to avoid the user getting stuck on the spinner that appears after scanning a secure QR code.
 
 ### Creating Trusonafications
 
