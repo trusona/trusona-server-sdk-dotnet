@@ -7,7 +7,6 @@
 // Copyright (c) 2018 Trusona, Inc.
 using System;
 using System.Collections.Generic;
-using System.Net;
 using TrusonaSDK.HTTP.Client.Interceptor;
 using TrusonaSDK.HTTP.Client.V2.Service;
 
@@ -40,8 +39,6 @@ namespace TrusonaSDK.HTTP.Client
 
     public ServiceFactory(IConfiguration configuration, IHttpClientWrapper clientWrapper)
     {
-      ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
       this._configuration = configuration;
       this._clientWrapper = clientWrapper;
     }

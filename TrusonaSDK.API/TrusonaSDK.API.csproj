@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFramework>netstandard1.4</TargetFramework>
 		<PackageId>Trusona.SDK</PackageId>
 		<Authors>Trusona, Inc.</Authors>
 		<Description>Trusona .NET SDK</Description>
@@ -23,6 +23,7 @@
 	<ItemGroup>
 		<PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
 		<PackageReference Include="AutoMapper" Version="6.2.2" />
+		<PackageReference Include="System.Threading.Thread" Version="4.3.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Model\" />

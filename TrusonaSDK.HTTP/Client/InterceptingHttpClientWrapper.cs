@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 using TrusonaSDK.HTTP.Client.Interceptor;
 
@@ -15,23 +16,17 @@ namespace TrusonaSDK.HTTP.Client
 {
   public class InterceptingHttpClientWrapper : IHttpClientWrapper
   {
-    #region Private Fields
-
-    private static readonly HttpClient client = new HttpClient();
+    private readonly HttpClient client;
     private readonly IEnumerable<IHttpInterceptor> _interceptors;
-
-    #endregion
-
-    #region Constructors
 
     public InterceptingHttpClientWrapper(IEnumerable<IHttpInterceptor> interceptors)
     {
+      this.client = new HttpClient(
+        handler: new HttpClientHandler { SslProtocols = SslProtocols.Tls12 },
+        disposeHandler: true
+      );
       this._interceptors = interceptors;
     }
-
-    #endregion
-
-    #region Public Methods
 
     public async Task<HttpResponseMessage> HandleRequest(HttpRequestMessage message,
                                                          ICredentialProvider credentialProvider)
@@ -50,7 +45,5 @@ namespace TrusonaSDK.HTTP.Client
 
       return response;
     }
-
-    #endregion
   }
 }
