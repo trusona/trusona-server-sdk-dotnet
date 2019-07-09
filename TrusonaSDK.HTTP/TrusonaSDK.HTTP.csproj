@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.4</TargetFramework>
     <ReleaseVersion>1.0.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>trusona-sdk-http.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <IntermediateOutputPath>obj\Debug\netstandard1.0</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Debug\netstandard1.0</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Client\" />
