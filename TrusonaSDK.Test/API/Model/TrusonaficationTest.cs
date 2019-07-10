@@ -3,9 +3,12 @@
 //
 // Author:
 //       David Kopack <d@trusona.com>
+//       Nikolas Mangu-Thitu <n@trusona.com>
 //
 // Copyright (c) 2018 Trusona, Inc.
 using System;
+using System.Collections.Generic;
+
 using TrusonaSDK.API.Model;
 using Xunit;
 using FluentAssertions;
@@ -89,6 +92,34 @@ namespace TrusonaSDK.API.Model
       sut.Prompt.Should().BeFalse();
       sut.UserPresence.Should().BeFalse();
       sut.ShowIdentityDocument.Should().BeFalse();
+    }
+
+    [Fact]
+    public void Essential_should_be_valid_with_custom_fields()
+    {
+      var sampleDate = DateTime.Now;
+      var fields = new Dictionary<string, object>();
+
+      fields.Add("african", "tiger");
+      fields.Add("taco", 1);
+
+      var sut = Trusonafication.Essential()
+                               .UserIdentifier("jones")
+                               .Action("sit")
+                               .Resource("your lap")
+                               .ExpiresAt(sampleDate)
+                               .WithoutPrompt()
+                               .WithoutUserPresence()
+                               .WithCustomFields(fields)
+                               .Build();
+      //then
+      sut.DesiredLevel.Should().Be(1);
+      sut.ExpiresAt.Should().Be(sampleDate.ToUniversalTime());
+      sut.Prompt.Should().BeFalse();
+      sut.UserPresence.Should().BeFalse();
+      sut.ShowIdentityDocument.Should().BeFalse();
+      sut.CustomFields.GetValueOrDefault("african", null).Should().Be("tiger");
+      sut.CustomFields.GetValueOrDefault("taco", null).Should().Be(1);
     }
 
     [Fact]
