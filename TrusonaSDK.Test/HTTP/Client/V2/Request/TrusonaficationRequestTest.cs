@@ -20,15 +20,6 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
 {
   public class TrusonaficationRequestTest : RequestResponseTest<TrusonaficationRequest>
   {
-    public static Dictionary<string, object> TestCustomFields()
-    {
-      Dictionary<string, object> customFields = new Dictionary<string, object>();
-      customFields.Add("african", "tiger");
-      customFields.Add("taco", 1);
-
-      return customFields;
-    }
-
     public override TrusonaficationRequest Sut => new TrusonaficationRequest()
     {
       DeviceIdentifier = "datDevice",
@@ -57,7 +48,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
       UserPresence = false,
       Prompt = false,
       ShowIdentityDocument = true,
-      CustomFields = TestCustomFields()
+      CustomFields = new Dictionary<string, object> { { "african", "tiger" }, { "taco", 1 } }
     };
 
     public override string Json => @"{

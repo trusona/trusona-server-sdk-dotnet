@@ -98,10 +98,6 @@ namespace TrusonaSDK.API.Model
     public void Essential_should_be_valid_with_custom_fields()
     {
       var sampleDate = DateTime.Now;
-      var fields = new Dictionary<string, object>();
-
-      fields.Add("african", "tiger");
-      fields.Add("taco", 1);
 
       var sut = Trusonafication.Essential()
                                .UserIdentifier("jones")
@@ -110,7 +106,7 @@ namespace TrusonaSDK.API.Model
                                .ExpiresAt(sampleDate)
                                .WithoutPrompt()
                                .WithoutUserPresence()
-                               .WithCustomFields(fields)
+                               .WithCustomFields(new Dictionary<string, object> { { "african", "tiger" }, { "taco", 1 } })
                                .Build();
       //then
       sut.DesiredLevel.Should().Be(1);
