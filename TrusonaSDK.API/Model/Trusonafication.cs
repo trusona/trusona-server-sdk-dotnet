@@ -3,9 +3,12 @@
 //
 // Author:
 //       David Kopack <d@trusona.com>
+//       Nikolas Mangu-Thitu <n@trusona.com>
 //
 // Copyright (c) 2018 Trusona, Inc.
 using System;
+using System.Collections.Generic;
+
 namespace TrusonaSDK.API.Model
 {
   public sealed class Trusonafication
@@ -83,6 +86,12 @@ namespace TrusonaSDK.API.Model
     }
 
     public bool ShowIdentityDocument
+    {
+      get;
+      internal set;
+    }
+
+    public Dictionary<string, object> CustomFields
     {
       get;
       internal set;
@@ -167,6 +176,14 @@ namespace TrusonaSDK.API.Model
       /// <returns>The next step required to finish building the trusonafication.</returns>
       /// <param name="expiresAt">Expires at.</param>
       IFinalizeStep ExpiresAt(DateTime expiresAt);
+
+      /// <summary>
+      /// Set an abitrary key-value dictionary of data (limited to 1 MB) made available to the trusonafication,
+      /// typically for enhancing the UI experience.
+      /// </summary>
+      /// <returns>The next step required to finish building the trusonafication.</returns>
+      /// <param name="customFields">Dictionary of key-value pairs</param>
+      IFinalizeStep WithCustomFields(Dictionary<string, object> customFields);
 
       /// <summary>
       /// Returns the trusonafication that was configured by the builder.
@@ -262,6 +279,12 @@ namespace TrusonaSDK.API.Model
       public virtual IFinalizeStep WithoutUserPresence()
       {
         _trusonafication.UserPresence = false;
+        return this;
+      }
+
+      public virtual IFinalizeStep WithCustomFields(Dictionary<string, object> customFields)
+      {
+        _trusonafication.CustomFields = customFields;
         return this;
       }
 

@@ -3,9 +3,11 @@
 //
 // Author:
 //       David Kopack <d@trusona.com>
+//       Nikolas Mangu-Thitu <n@trusona.com>
 //
 // Copyright (c) 2018 Trusona, Inc.
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace TrusonaSDK.HTTP.Client.V2.Request
@@ -25,6 +27,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
     public bool UserPresence { get; set; }
     public bool Prompt { get; set; }
     public bool ShowIdentityDocument { get; set; }
+    public Dictionary<string, object> CustomFields { get; set; }
 
     public TrusonaficationRequest() { }
   }
