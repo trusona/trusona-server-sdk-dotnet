@@ -22,6 +22,7 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
       1. [Creating an Essential Trusonafication, with a TruCode](#creating-an-essential-trusonafication-with-a-trucode)
       1. [Creating an Essential Trusonafication, with the user's identifier](#creating-an-essential-trusonafication-with-the-users-identifier)
       1. [Creating an Essential Trusonafication, with the user's email](#creating-an-essential-trusonafication-with-the-users-email)
+      1. [Adding custom fields to a Trusonafication](#adding-custom-fields-to-a-trusonafication)
       1. [Creating an Executive Trusonafication](#creating-an-executive-trusonafication)
    1. [Using TruCode for device discovery](#using-trucode-for-device-discovery)
    1. [Retrieving identity documents](#retrieving-identity-documents)
@@ -320,8 +321,27 @@ by specifying their email address. This is the case if one of the following is t
 - You have verified ownership of a domain through the Trusona Developer's site
 - You have an agreement with Trusona allowing you to send Trusonafications to any email address.
 
-Creating a Trusonafication with an email address is similar to the other
-use cases, except you use the `EmailAddress()` method rather than `UserIdentifier()` or `DeviceIdentifier()`.
+Creating a Trusonafication with an email address is similar to the other use cases, except you use the `EmailAddress()` method rather than `UserIdentifier()` or `DeviceIdentifier()`.
+
+#### Adding custom fields to a Trusonafication
+
+```csharp
+var request = Trusonafication.Essential()
+                .EmailAddress("email@example.com")
+                .Action("login")
+                .Resource("Acme Bank")
+                .WithCustomFields(new Dictionary<string, object> { { "greeting", "hello!" }, { "last-login", false } })
+                .Build();
+```
+
+If you are using the mobile SDK to build a custom app that integrates with Trusona, you have the option of including additional data on the Trusonafication which the app can use to affect its behavior.
+
+For example, you may want to include additional context on the Trusonafication prompt, per the example above.
+
+You can add these custom fields by passing a `Dictionary` into the `WithCustomFields` builder method. The data will then be available in the Trusonafication received by the SDK.
+
+Note that the custom fields are not used in the case that the Trusonafication is being handled by the Trusona app.
+
 
 #### Creating an Executive Trusonafication
 
@@ -364,6 +384,7 @@ Executive Trusonafications require the user to scan an identity document to auth
 | `ExpiresAt`           |    N     |  null   | An ISO-8601 UTC date that sets the expiration time of the Trusonafication.                       |
 | `WithoutUserPresence` |    N     |  false  | Removes the requirement for the user to demonstrate presence when accepting the Trusonafication. |
 | `WithoutPrompt`       |    N     |  false  | Removes the requirement for the user to explicityly "Accept" or "Reject" the Trusonafication.    |
+| `WithCustomFields`    |    N     | null    | Arbitrary key-value data fields made available to the Trusonafication. Amount of data in the hash is limited to 1MB |
 
 [^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `DeviceIdentifier`, `TruCode`, `UserIdentifier`, and `EmailAddress`.
 
