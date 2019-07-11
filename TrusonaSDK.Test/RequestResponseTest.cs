@@ -17,8 +17,6 @@ namespace TrusonaSDK
     public abstract T Sut { get; }
     public abstract string Json { get; }
 
-    const string whitespace = " ";
-
     [Fact]
     public virtual void _should_be_serializable()
     {
