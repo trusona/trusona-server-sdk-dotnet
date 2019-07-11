@@ -384,7 +384,7 @@ Executive Trusonafications require the user to scan an identity document to auth
 | `ExpiresAt`           |    N     |  null   | An ISO-8601 UTC date that sets the expiration time of the Trusonafication.                       |
 | `WithoutUserPresence` |    N     |  false  | Removes the requirement for the user to demonstrate presence when accepting the Trusonafication. |
 | `WithoutPrompt`       |    N     |  false  | Removes the requirement for the user to explicityly "Accept" or "Reject" the Trusonafication.    |
-| Custom Fields         |    N     | null    | Arbitrary key-value data fields made available to the Trusonafication. Amount of data in the hash is limited to 1MB |
+| `WithCustomFields`    |    N     | null    | Arbitrary key-value data fields made available to the Trusonafication. Amount of data in the hash is limited to 1MB |
 
 [^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `DeviceIdentifier`, `TruCode`, `UserIdentifier`, and `EmailAddress`.
 
