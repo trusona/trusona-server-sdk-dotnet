@@ -5,7 +5,7 @@
 		<PackageId>Trusona.SDK</PackageId>
 		<Authors>Trusona, Inc.</Authors>
 		<Description>Trusona .NET SDK</Description>
-		<ReleaseVersion>4.0.0</ReleaseVersion>
+		<ReleaseVersion>4.1.0</ReleaseVersion>
 		<PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
 		<PackageIconUrl>https://secure.gravatar.com/avatar/c97b231a9f264d9eea98d94e7cf7b772?s=512&amp;r=g&amp;d=retro</PackageIconUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
