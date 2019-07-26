@@ -97,6 +97,12 @@ namespace TrusonaSDK.API.Model
       internal set;
     }
 
+    public string CallbackUrl
+    {
+      get;
+      internal set;
+    }
+
     #endregion
 
     #region Builder Steps
@@ -184,6 +190,18 @@ namespace TrusonaSDK.API.Model
       /// <returns>The next step required to finish building the trusonafication.</returns>
       /// <param name="customFields">Dictionary of key-value pairs</param>
       IFinalizeStep WithCustomFields(Dictionary<string, object> customFields);
+
+      /// <summary>
+      /// An HTTPS URL to call when the trusonafication has been completed (accepted, rejected, or expired). The
+      /// request will be a POST and the body will be the same JSON format as sending a GET request to
+      /// /api/v2/trusonafications/{id}.
+      ///
+      /// NOTE: The URL should include a randomized segment so it cannot be guessed and abused by third-parties
+      /// (i.e https://your.domain.com/completed_authentications/f8abe61d-4e51-493f-97b1-464c157624f2).
+      /// </summary>
+      /// <returns>The next step required to finish building the trusonafication.</returns>
+      /// <param name="callbackUrl">The URL to POST to when the trusonafication is completed.</param>
+      IFinalizeStep CallbackUrl(string callbackUrl);
 
       /// <summary>
       /// Returns the trusonafication that was configured by the builder.
@@ -285,6 +303,12 @@ namespace TrusonaSDK.API.Model
       public virtual IFinalizeStep WithCustomFields(Dictionary<string, object> customFields)
       {
         _trusonafication.CustomFields = customFields;
+        return this;
+      }
+
+      public virtual IFinalizeStep CallbackUrl(string callbackUrl)
+      {
+        _trusonafication.CallbackUrl = callbackUrl;
         return this;
       }
 

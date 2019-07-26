@@ -19,6 +19,7 @@ namespace TrusonaSDK.Test
   public class Buster
   {
     private readonly HttpClient client = new HttpClient();
+    private readonly string busterUrl = "https://buster.staging.trusona.net";
 
     public Buster()
     {
@@ -42,7 +43,7 @@ namespace TrusonaSDK.Test
         mediaType: Headers.MEDIA_TYPE_JSON_VALUE
       );
 
-      var response = client.PostAsync("https://buster.staging.trusona.net/faux_devices", requestBody).Result;
+      var response = client.PostAsync($"{busterUrl}/faux_devices", requestBody).Result;
 
       response.EnsureSuccessStatusCode();
 
@@ -52,7 +53,7 @@ namespace TrusonaSDK.Test
 
     public IDictionary<string, string> SyncDevice(string id)
     {
-      var response = client.GetAsync(string.Format("https://buster.staging.trusona.net/faux_devices/{0}", id)).Result;
+      var response = client.GetAsync($"{busterUrl}/faux_devices/{id}").Result;
 
       response.EnsureSuccessStatusCode();
 
@@ -72,12 +73,25 @@ namespace TrusonaSDK.Test
         mediaType: Headers.MEDIA_TYPE_JSON_VALUE
       );
 
-      var response = client.PostAsync(string.Format("https://buster.staging.trusona.net/faux_devices/{0}/trusonafication_responses", id), requestBody).Result;
+      var response = client.PostAsync($"{busterUrl}/faux_devices/{id}/trusonafication_responses", requestBody).Result;
 
       response.EnsureSuccessStatusCode();
 
       string responseBody = response.Content.ReadAsStringAsync().Result;
       return JsonConvert.DeserializeObject<IDictionary<string, string>>(responseBody);
+    }
+
+    public string GetCallbackUrl(string id)
+    {
+      return $"{busterUrl}/callbacks/{id}";
+    }
+
+    public IDictionary<string, object> GetCallback(string id)
+    {
+      var response = client.GetAsync($"{busterUrl}/callbacks/{id}").Result;
+      string responseBody = response.Content.ReadAsStringAsync().Result;
+      return JsonConvert.DeserializeObject<IDictionary<string, object>>(responseBody);
+
     }
   }
 }
