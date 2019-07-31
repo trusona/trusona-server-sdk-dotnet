@@ -32,7 +32,8 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
       ExpiresAt = DateTime.Parse("2018-01-23T23:28:45Z").ToUniversalTime(),
       UserPresence = false,
       Prompt = false,
-      ShowIdentityDocument = true
+      ShowIdentityDocument = true,
+      CallbackUrl = "https://call.me"
     };
 
     public TrusonaficationRequest SutWithCustomFields => new TrusonaficationRequest()
@@ -53,6 +54,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
 
     public override string Json => @"{
   ""action"": ""partay"",
+  ""callback_url"": ""https://call.me"",
   ""desired_level"": 2,
   ""device_identifier"": ""datDevice"",
   ""email"": ""jones@tacos.com"",

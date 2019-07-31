@@ -28,6 +28,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
     public bool Prompt { get; set; }
     public bool ShowIdentityDocument { get; set; }
     public Dictionary<string, object> CustomFields { get; set; }
+    public string CallbackUrl { get; set; }
 
     public TrusonaficationRequest() { }
   }
