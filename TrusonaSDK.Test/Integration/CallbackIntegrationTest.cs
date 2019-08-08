@@ -43,7 +43,7 @@ namespace TrusonaSDK.Integration
       buster.AcceptTrusonafication(deviceIdentifier, trusonaficationId.ToString());
 
       //then
-      AssertEventuallyTrue(10000, () => buster.GetCallback(callbackId)["status"].Equals("ACCEPTED"));
+      AssertEventuallyTrue(10000, () => buster.GetCallback(callbackId).Count > 0);
     }
 
     public void AssertEventuallyTrue(int timeout, Func<bool> action)
