@@ -22,7 +22,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
-		<PackageReference Include="AutoMapper" Version="6.2.2" />
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="System.Threading.Thread" Version="4.3.0" />
 	</ItemGroup>
 	<ItemGroup>
