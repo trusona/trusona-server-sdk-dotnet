@@ -1,4 +1,4 @@
-﻿//
+//
 // HmacSignatureException.cs
 //
 // Author:

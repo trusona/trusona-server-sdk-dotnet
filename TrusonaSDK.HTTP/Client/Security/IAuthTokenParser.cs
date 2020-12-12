@@ -1,4 +1,4 @@
-﻿//
+//
 // IAuthTokenParser.cs
 //
 // Author:

@@ -1,4 +1,4 @@
-﻿//
+//
 // RequestHmacMessage.cs
 //
 // Author:

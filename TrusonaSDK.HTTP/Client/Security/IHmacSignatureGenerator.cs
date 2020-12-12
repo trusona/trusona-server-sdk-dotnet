@@ -1,4 +1,4 @@
-﻿//
+//
 // HmacSignatureGenerator.cs
 //
 // Author:
