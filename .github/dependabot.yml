@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "TrusonaSDK.API/"
+    open-pull-requests-limit: 10
+    schedule:
+      interval: "daily"
+    pull-request-branch-name:
+      separator: "-"
+
+  - package-ecosystem: "nuget"
+    directory: "TrusonaSDK.HTTP/"
+    open-pull-requests-limit: 10
+    schedule:
+      interval: "daily"
+    pull-request-branch-name:
+      separator: "-"
+
+  - package-ecosystem: "nuget"
+    directory: "TrusonaSDK.Test/"
+    open-pull-requests-limit: 10
+    schedule:
+      interval: "daily"
+    pull-request-branch-name:
+      separator: "-"
