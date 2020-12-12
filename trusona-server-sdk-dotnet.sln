@@ -33,6 +33,6 @@ Global
 		$0.VersionControlPolicy = $2
 		$0.StandardHeader = $3
 		$3.Text = @\n${FileName}\n \nAuthor:\n      ${AuthorName} <${AuthorEmail}>\n\nCopyright (c) ${Year} ${CopyrightHolder}\n\n
-		version = 5.0.0
+		version = 5.1.0
 	EndGlobalSection
 EndGlobal
