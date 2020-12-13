@@ -13,11 +13,11 @@
 		<AssemblyOriginatorKeyFile>trusona-sdk-api.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	  <DocumentationFile>bin\Debug\netstandard2.1\TrusonaSDK.API.xml</DocumentationFile>
+	  <DocumentationFile>bin\Debug\netstandard2.0\TrusonaSDK.API.xml</DocumentationFile>
 	</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 	  <DebugType></DebugType>
-	  <DocumentationFile>bin\Release\netstandard2.1\TrusonaSDK.API.xml</DocumentationFile>
+	  <DocumentationFile>bin\Release\netstandard2.0\TrusonaSDK.API.xml</DocumentationFile>
     <NoWarn>1591,1570</NoWarn>
   </PropertyGroup>
 	<ItemGroup>
