@@ -81,7 +81,7 @@ namespace TrusonaSDK.API
     /// <summary>
     /// Gets a Trusonafication for a given Trusonafication ID.
     /// </summary>
-    /// <returns>A TrusonaficationResult</returns>
+    /// <returns>A Trusonafication</returns>
     /// <param name="trusona">Trusona API.</param>
     /// <param name="trusonaficationId">Trusonafication identifier.</param>
     public static async Task<Trusonafication> GetTrusonafication(this Trusona trusona, Guid trusonaficationId)
