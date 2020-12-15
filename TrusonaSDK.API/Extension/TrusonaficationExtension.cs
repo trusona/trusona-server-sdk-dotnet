@@ -8,9 +8,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+
 using TrusonaSDK.API.Model;
 using TrusonaSDK.HTTP.Client.V2.Request;
 using TrusonaSDK.HTTP.Client.V2.Service;
+
 using static TrusonaSDK.API.Trusona;
 
 namespace TrusonaSDK.API
@@ -36,7 +38,8 @@ namespace TrusonaSDK.API
       }
       catch (TrusonaServiceException ex)
       {
-        if (ex.HttpResponse.StatusCode.Equals(422)) {
+        if (ex.HttpResponse.StatusCode.Equals(422))
+        {
           // TODO: Additional logic here?
         }
         HandleServiceException(ex, DefaultErrorHandler);
@@ -67,6 +70,26 @@ namespace TrusonaSDK.API
         }
 
         return result;
+      }
+      catch (TrusonaServiceException ex)
+      {
+        HandleServiceException(ex, DefaultErrorHandler);
+        throw ex;
+      }
+    }
+
+    /// <summary>
+    /// Gets a Trusonafication for a given Trusonafication ID.
+    /// </summary>
+    /// <returns>A Trusonafication</returns>
+    /// <param name="trusona">Trusona API.</param>
+    /// <param name="trusonaficationId">Trusonafication identifier.</param>
+    public static async Task<Trusonafication> GetTrusonafication(this Trusona trusona, Guid trusonaficationId)
+    {
+      try
+      {
+        var response = await trusona.TrusonaficationService.GetTrusonaficationAsync(trusonaficationId);
+        return trusona.mapper.Map<Trusonafication>(response);
       }
       catch (TrusonaServiceException ex)
       {

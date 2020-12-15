@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
-		<PackageId>Trusona.SDK</PackageId>
-		<Authors>Trusona, Inc.</Authors>
-		<Description>Trusona .NET SDK</Description>
-		<PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
-		<PackageIconUrl>https://secure.gravatar.com/avatar/c97b231a9f264d9eea98d94e7cf7b772?s=512&amp;r=g&amp;d=retro</PackageIconUrl>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PackageProjectUrl>https://github.com/trusona/trusona-server-sdk-dotnet</PackageProjectUrl>
-		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>trusona-sdk-api.snk</AssemblyOriginatorKeyFile>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	  <DocumentationFile>bin\Debug\netstandard2.1\TrusonaSDK.API.xml</DocumentationFile>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <PackageId>Trusona.SDK</PackageId>
+    <Authors>Trusona, Inc.</Authors>
+    <Description>Trusona .NET SDK</Description>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageIconUrl>https://secure.gravatar.com/avatar/c97b231a9f264d9eea98d94e7cf7b772?s=512&amp;r=g&amp;d=retro</PackageIconUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/trusona/trusona-server-sdk-dotnet</PackageProjectUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>trusona-sdk-api.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>bin\Debug\netstandard1.6\TrusonaSDK.API.xml</DocumentationFile>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	  <DebugType></DebugType>
-	  <DocumentationFile>bin\Release\netstandard2.1\TrusonaSDK.API.xml</DocumentationFile>
+    <DebugType></DebugType>
+    <DocumentationFile>bin\Release\netstandard1.6\TrusonaSDK.API.xml</DocumentationFile>
     <NoWarn>1591,1570</NoWarn>
   </PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
-		<PackageReference Include="AutoMapper" Version="10.1.1" />
-		<PackageReference Include="System.Threading.Thread" Version="4.3.0" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Model\" />
-	  <Folder Include="Test\" />
-	  <Folder Include="Exception\" />
-	  <Folder Include="Extension\" />
-	  <Folder Include="Configuration\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\TrusonaSDK.HTTP\TrusonaSDK.HTTP.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="Test\" />
+    <Folder Include="Exception\" />
+    <Folder Include="Extension\" />
+    <Folder Include="Configuration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrusonaSDK.HTTP\TrusonaSDK.HTTP.csproj" />
+  </ItemGroup>
 </Project>

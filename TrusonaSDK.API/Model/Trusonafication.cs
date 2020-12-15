@@ -25,6 +25,24 @@ namespace TrusonaSDK.API.Model
 
     #region Properties
 
+    public string TrusonaId
+    {
+      get;
+      internal set;
+    }
+
+    public Guid Id
+    {
+      get;
+      internal set;
+    }
+
+    public TrusonaficationStatus Status
+    {
+      get;
+      internal set;
+    }
+
     public string DeviceIdentifier
     {
       get;
@@ -68,6 +86,24 @@ namespace TrusonaSDK.API.Model
     }
 
     public DateTime? ExpiresAt
+    {
+      get;
+      internal set;
+    }
+
+    public DateTime CreatedAt
+    {
+      get;
+      internal set;
+    }
+
+    public DateTime UpdatedAt
+    {
+      get;
+      internal set;
+    }
+
+    public TrusonaficationResult Result
     {
       get;
       internal set;
