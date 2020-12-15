@@ -1,0 +1,87 @@
+# Starter pipeline
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+#
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  configuration: 'Release'
+  artifacts: 'artifacts'
+  defaultBranch: 'master'
+  repository: 'https://trusona.jfrog.io/trusona/api/nuget/nuget-local'
+  solution: 'trusona-server-sdk-dotnet.sln'
+
+steps:
+- task: ChocolateyToolInstaller@0
+
+- task: CmdLine@2
+  displayName: 'Install tools...'
+  inputs:
+    failOnStderr: true
+    script: |
+      choco install sed zip curl bat grep awk git
+
+- task: DotNetCoreCLI@2
+  displayName: 'Restoring...'
+  inputs:
+    command: restore
+
+- task: DotNetCoreCLI@2
+  displayName: 'Building...'
+  inputs:
+    command: build
+    projects: 'TrusonaSDK.*/*.csproj'
+    arguments: '--verbosity quiet --configuration $(configuration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Testing...'
+  inputs:
+    command: test
+    projects: 'TrusonaSDK.Test/TrusonaSDK.Test.csproj'
+    arguments: '--configuration $(configuration) -v quiet --filter Category!=Integration --collect "Code Coverage"'
+
+- task: Bash@3
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], variables['defaultBranch']), startsWith(variables['Build.SourceBranch'], 'refs/tags/')))
+  displayName: 'Before packing...'
+  env:
+    solution: $(solution)
+    branchPath: '$(Build.SourceBranch)'
+  inputs:
+    targetType: inline
+    script: |
+      versionSuffix="`cat $solution | grep "version" | awk '{print $3}'`"
+      if [[ $branchPath =~ refs/tags/ ]]; then
+        PackageVersion="${versionSuffix}"
+      else
+        PackageVersion="${versionSuffix}-beta"
+      fi
+      echo "##vso[task.setvariable variable=PackageVersion]$PackageVersion"
+
+- task: DotNetCoreCLI@2
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], variables['defaultBranch']), startsWith(variables['Build.SourceBranch'], 'refs/tags/')))
+  displayName: 'Packing (master)...'
+  env:
+    PackageVersion: '$(PackageVersion)'
+  inputs:
+    command: custom
+    custom: pack
+    arguments: '-c $(configuration) -o $(artifacts)'
+
+- task: DotNetCoreCLI@2
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], variables['defaultBranch']), startsWith(variables['Build.SourceBranch'], 'refs/tags/')))
+  displayName: 'Publish (master)...'
+  env:
+    PackageVersion: '$(PackageVersion)'
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push $(artifacts)/Trusona.SDK.$(PackageVersion).nupkg --source "$(repository)" --api-key "$(NUGET_JFROG_USER):$(NUGET_JFROG_API_KEY)"'

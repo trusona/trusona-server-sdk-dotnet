@@ -1,4 +1,4 @@
-﻿//
+//
 // HmacAuthInterceptor.cs
 //
 // Author:

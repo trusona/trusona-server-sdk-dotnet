@@ -1,4 +1,4 @@
-﻿//
+//
 // ServiceUrlBuilderTest.cs
 //
 // Author:
