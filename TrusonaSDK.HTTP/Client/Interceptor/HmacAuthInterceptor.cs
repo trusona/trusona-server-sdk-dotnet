@@ -7,10 +7,11 @@
 // Copyright (c) 2018 Trusona, Inc.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+
 using TrusonaSDK.HTTP.Client.Security;
-using System.Linq;
 
 namespace TrusonaSDK.HTTP.Client.Interceptor
 {
@@ -34,15 +35,11 @@ namespace TrusonaSDK.HTTP.Client.Interceptor
 
     public void InterceptRequest(HttpRequestMessage message, ICredentialProvider credentialProvider)
     {
-      if (credentialProvider == null) return;
-      if (string.IsNullOrEmpty(credentialProvider.Secret)) return;
+      if (credentialProvider == null || !credentialProvider.HasCredentials) { return; }
 
-      var utcTimestamp = DateTime.Now
-                                 .ToUniversalTime()
-                                 .ToString(rfcHttpDateFormat);
+      var utcTimestamp = DateTime.Now.ToUniversalTime().ToString(rfcHttpDateFormat);
 
       message.Headers.Add(Headers.X_DATE, utcTimestamp);
-
 
       using (var generator = new TrusonaHmacSignatureGenerator(credentialProvider.Secret))
       {
@@ -55,22 +52,31 @@ namespace TrusonaSDK.HTTP.Client.Interceptor
 
     public void InterceptResponse(HttpResponseMessage message, ICredentialProvider credentialProvider)
     {
-      if (credentialProvider == null) return;
-      if (string.IsNullOrEmpty(credentialProvider.Secret)) return;
       if (!message.IsSuccessStatusCode) { return; }
 
-      IEnumerable<string> headerValues;
-      if (message.Headers.TryGetValues(Headers.X_SIGNATURE, out headerValues))
+      if (message.Headers.TryGetValues(Headers.X_SIGNATURE, out IEnumerable<string> headerValues))
       {
-        var actualSignature = headerValues.First();
+        string actualSignature, hmacParts, expectedSignature = "";
+
+        if (credentialProvider?.HasCredentials == true)
+        {
+          actualSignature = headerValues.First();
+        }
+        else
+        {
+          throw new HmacSignatureException("Credentials not available for HMAC Signature verification");
+        }
+
         using (var generator = new TrusonaHmacSignatureGenerator(credentialProvider.Secret))
         {
-          var expectedSignature = generator.GetSignature(new ResponseHmacMessage(message));
-          if (expectedSignature.Equals(actualSignature)) return;
-        }
-      }
+          hmacParts = string.Join("\n", generator.GetHmacParts(new ResponseHmacMessage(message))); // debugging
 
-      throw new HmacSignatureException();
+          expectedSignature = generator.GetSignature(new ResponseHmacMessage(message));
+          if (expectedSignature.Equals(actualSignature)) { return; }
+        }
+
+        throw new HmacSignatureException(string.Format("Failed to verify response HMAC after {0}.\nExpected: {1} vs. actual: {2}\n{3}", message.StatusCode, expectedSignature, actualSignature, hmacParts));
+      }
     }
 
     #endregion
