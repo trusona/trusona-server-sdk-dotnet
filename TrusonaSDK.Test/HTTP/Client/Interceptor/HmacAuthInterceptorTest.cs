@@ -101,6 +101,22 @@ namespace TrusonaSDK.HTTP.Client.Interceptor
     }
 
     [Fact]
+    public void InterceptResponse_should_throw_exception_if_signature_is_present_but_credentials_are_absent()
+    {
+      //given
+      var message = new HttpResponseMessage();
+      message.Headers.Add(Headers.X_SIGNATURE, "MjBmYmFkMzI3NTA2MWE3N2ViZDA1ZGFmNTU4NWMyYWIyZjVlNDY0NzIyNDVmNGJkZTdjMThhNDgwNzBmYjg2Mg==");
+
+      //when
+      Action act = () => sut.InterceptResponse(message, null);
+
+      //then
+      act
+        .Should()
+        .Throw<HmacSignatureException>();
+    }
+
+    [Fact]
     public void InterceptResponse_should_raise_exception_when_signature_is_invalid()
     {
       //given
