@@ -16,7 +16,7 @@ pool:
 variables:
   configuration: 'Release'
   artifacts: 'artifacts'
-  defaultBranch: 'wip-integration-accounts' ### revert back to MASTER ASAP!
+  defaultBranch: 'master'
   repository: 'https://trusona.jfrog.io/trusona/api/nuget/nuget-local'
   solution: 'trusona-server-sdk-dotnet.sln'
 
