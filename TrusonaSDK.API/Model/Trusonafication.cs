@@ -150,7 +150,7 @@ namespace TrusonaSDK.API.Model
       /// </summary>
       /// <returns>The next step required to finish building the trusonafication.</returns>
       /// <param name="deviceIdentifier">Device identifier.</param>
-      IActionStep DeviceIdentifier(String deviceIdentifier);
+      IActionStep DeviceIdentifier(string deviceIdentifier);
 
       /// <summary>
       /// Sets the TruCode ID that was scanned by a Trusona enabled device.
@@ -165,14 +165,16 @@ namespace TrusonaSDK.API.Model
       /// </summary>
       /// <returns>The next step required to finish building the trusonafication.</returns>
       /// <param name="userIdentifier">User identifier.</param>
-      IActionStep UserIdentifier(String userIdentifier);
+      IActionStep UserIdentifier(string userIdentifier);
+
+      IActionStep TrusonaIdentifier(string trusonaId);
 
       /// <summary>
       /// Sets the user email address of the user to be authenticated.
       /// </summary>
       /// <returns>The next step required to finish building the trusonafication.</returns>
       /// <param name="emailAddress">Email address.</param>
-      IActionStep EmailAddress(String emailAddress);
+      IActionStep EmailAddress(string emailAddress);
     }
 
     public interface IActionStep
@@ -182,7 +184,7 @@ namespace TrusonaSDK.API.Model
       /// </summary>
       /// <returns>The next step required to finish building the trusonafication.</returns>
       /// <param name="action">Action.</param>
-      IResourceStep Action(String action);
+      IResourceStep Action(string action);
     }
 
     public interface IResourceStep
@@ -280,6 +282,12 @@ namespace TrusonaSDK.API.Model
         return this;
       }
 
+      public IActionStep TrusonaIdentifier(string trusonaId)
+      {
+        _trusonafication.TrusonaId = trusonaId;
+        return this;
+      }
+
       public virtual IActionStep UserIdentifier(string userIdentifier)
       {
         _trusonafication.UserIdentifier = userIdentifier;
@@ -350,7 +358,6 @@ namespace TrusonaSDK.API.Model
       {
         return _trusonafication;
       }
-
       #endregion
     }
 

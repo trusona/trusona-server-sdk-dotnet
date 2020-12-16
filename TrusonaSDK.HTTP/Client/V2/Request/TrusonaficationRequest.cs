@@ -22,6 +22,8 @@ namespace TrusonaSDK.HTTP.Client.V2.Request
     
     [JsonProperty("trucode_id")]
     public string TruCodeId { get; set; }
+
+    public string TrusonaId { get; set; }
     
     [JsonProperty("email")]
     public string EmailAddress { get; set; }

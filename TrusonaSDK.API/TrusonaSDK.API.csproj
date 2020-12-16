@@ -26,10 +26,8 @@
     <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="Test\" />
     <Folder Include="Exception\" />
-    <Folder Include="Extension\" />
     <Folder Include="Configuration\" />
   </ItemGroup>
   <ItemGroup>

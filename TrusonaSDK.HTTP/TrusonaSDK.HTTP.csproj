@@ -6,12 +6,7 @@
     <AssemblyOriginatorKeyFile>trusona-sdk-http.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Client\" />
     <Folder Include="Client\Security\" />
-    <Folder Include="Client\V2\" />
-    <Folder Include="Client\V2\Response\" />
-    <Folder Include="Client\V2\Request\" />
-    <Folder Include="Client\V2\Service\" />
     <Folder Include="Client\V2\Serialization\" />
     <Folder Include="Client\Interceptor\" />
   </ItemGroup>
