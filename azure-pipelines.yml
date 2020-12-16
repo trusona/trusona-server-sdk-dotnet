@@ -16,7 +16,7 @@ pool:
 variables:
   configuration: 'Release'
   artifacts: 'artifacts'
-  defaultBranch: 'master'
+  defaultBranch: 'wip-integration-accounts' ### revert back to MASTER ASAP!
   repository: 'https://trusona.jfrog.io/trusona/api/nuget/nuget-local'
   solution: 'trusona-server-sdk-dotnet.sln'
 
@@ -55,6 +55,7 @@ steps:
   env:
     solution: $(solution)
     branchPath: '$(Build.SourceBranch)'
+    commitHash: '$(Build.SourceVersion)'
   inputs:
     targetType: inline
     script: |
@@ -62,7 +63,7 @@ steps:
       if [[ $branchPath =~ refs/tags/ ]]; then
         PackageVersion="${versionSuffix}"
       else
-        PackageVersion="${versionSuffix}-beta"
+        PackageVersion="${versionSuffix}-preview-${commitHash}"
       fi
       echo "##vso[task.setvariable variable=PackageVersion]$PackageVersion"
 
