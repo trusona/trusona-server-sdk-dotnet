@@ -157,7 +157,27 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       }
     }
 
-    protected async Task Delete(string resource, string id, ICredentialProvider credentialProvider = null)
+    protected async Task<T> Delete<T>(string resource, string id, ICredentialProvider credentialProvider)
+    {
+      var message = new HttpRequestMessage
+      {
+        Method = new HttpMethod("DELETE"),
+        RequestUri = MemberUrl(resource, id)
+      };
+
+      var response = await _clientWrapper.HandleRequest(message, credentialProvider);
+
+      try
+      {
+        return await HandleContent<T>(response.EnsureSuccessStatusCode().Content);
+      }
+      catch (HttpRequestException ex)
+      {
+        throw new TrusonaServiceException(ex, response, TryResolveRequestId(response));
+      }
+    }
+
+    protected async Task Delete(string resource, string id, ICredentialProvider credentialProvider)
     {
       var message = new HttpRequestMessage
       {

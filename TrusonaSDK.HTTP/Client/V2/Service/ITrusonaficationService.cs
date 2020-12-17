@@ -21,5 +21,9 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
     TrusonaficationResponse CreateTrusonafication(TrusonaficationRequest request);
 
     TrusonaficationResponse GetTrusonafication(Guid id);
+
+    TrusonaficationResponse CancelTrusonafication(Guid id);
+
+    Task<TrusonaficationResponse> CancelTrusonaficationAsync(Guid id);
   }
 }
