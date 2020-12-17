@@ -27,7 +27,7 @@ namespace TrusonaSDK.Test
       var busterUsername = (string) environment["BUSTER_USERNAME"];
       var busterPassword = (string) environment["BUSTER_PASSWORD"];
 
-      var byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", busterUsername, busterPassword));
+      var byteArray = Encoding.UTF8.GetBytes(string.Format("{0}:{1}", busterUsername, busterPassword));
       client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
     }
 

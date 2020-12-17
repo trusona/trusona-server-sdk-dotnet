@@ -29,6 +29,8 @@ namespace TrusonaSDK.HTTP
       get { return _secret; }
     }
 
+    public bool HasCredentials => !string.IsNullOrWhiteSpace(Token) && !string.IsNullOrWhiteSpace(Secret);
+
     #endregion
 
     #region Constructors

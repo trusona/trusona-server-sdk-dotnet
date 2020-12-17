@@ -24,10 +24,7 @@ namespace TrusonaSDK.HTTP.Client.Security
 
     #region Constructors
 
-    public TrusonaHmacSignatureGenerator(string secret)
-    {
-      this.hmac = new HMACSHA256(Encoding.ASCII.GetBytes(secret));
-    }
+    public TrusonaHmacSignatureGenerator(string secret) => hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
 
     #endregion
 
@@ -35,8 +32,16 @@ namespace TrusonaSDK.HTTP.Client.Security
 
     public string GetSignature(IHmacMessage message)
     {
-      IEnumerable<string> parts = new List<string>()
+      var valueToDigest = string.Join(LF, GetHmacParts(message));
+
+      using (var input = ReadToStream(valueToDigest))
       {
+        return Encode(hmac.ComputeHash(input));
+      }
+    }
+
+    internal IEnumerable<string> GetHmacParts(IHmacMessage message) => new List<string>()
+       {
         message.Method,
         message.BodyDigest,
         message.ContentType,
@@ -44,31 +49,18 @@ namespace TrusonaSDK.HTTP.Client.Security
         message.RequestUri
       };
 
-      var valueToDigest = String.Join(LF, parts);
-      using (var input = ReadToStream(valueToDigest))
-      {
-        return Encode(hmac.ComputeHash(input));
-      }
-    }
-
-    public void Dispose()
-    {
-      this.hmac.Dispose();
-    }
+    public void Dispose() => hmac.Dispose();
 
     #endregion
 
     #region Private Methods
 
-    private static Stream ReadToStream(string input)
-    {
-      return new MemoryStream(Encoding.UTF8.GetBytes(input));
-    }
+    private static Stream ReadToStream(string input) => new MemoryStream(Encoding.UTF8.GetBytes(input));
 
-    private static String Encode(byte[] input)
+    private static string Encode(byte[] input)
     {
       var hexInput = BitConverter.ToString(input).Replace("-", "").ToLower();
-      return Convert.ToBase64String(Encoding.ASCII.GetBytes(hexInput));
+      return Convert.ToBase64String(Encoding.UTF8.GetBytes(hexInput));
     }
 
     #endregion

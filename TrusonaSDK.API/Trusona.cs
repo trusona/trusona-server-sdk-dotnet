@@ -3,17 +3,20 @@
 //
 // Author:
 //       David Kopack <d@trusona.com>
+//       Nikolas Mangu-Thitu <n@trusona.com>
 //
 // Copyright (c) 2018 Trusona, Inc.
-using System;
 using AutoMapper;
+
+using System;
+using System.Net;
+
 using TrusonaSDK.API.Configuration;
 using TrusonaSDK.API.Model;
-using System.Net;
-using TrusonaSDK.HTTP.Client.V2.Request;
-using TrusonaSDK.HTTP.Client.V2.Service;
 using TrusonaSDK.HTTP.Client;
+using TrusonaSDK.HTTP.Client.V2.Request;
 using TrusonaSDK.HTTP.Client.V2.Response;
+using TrusonaSDK.HTTP.Client.V2.Service;
 
 namespace TrusonaSDK.API
 {
@@ -33,6 +36,7 @@ namespace TrusonaSDK.API
     private IDeviceService _deviceService;
     private IUserService _userService;
     private IUserBindingService _userBindingService;
+    private IIntegrationAccountService _integrationAccountService;
 
     internal readonly IMapper mapper;
     internal readonly TimeSpan pollingInterval = TimeSpan.FromSeconds(5);
@@ -77,6 +81,15 @@ namespace TrusonaSDK.API
       {
         if (_trusonaficationsService == null) { _trusonaficationsService = _serviceFactory.CreateInstance<TrusonaficationService>(); }
         return _trusonaficationsService;
+      }
+    }
+
+    internal IIntegrationAccountService IntegrationAccountService
+    {
+      get
+      {
+        if (_integrationAccountService == null) { _integrationAccountService = _serviceFactory.CreateInstance<IntegrationAccountService>(); }
+        return _integrationAccountService;
       }
     }
 
@@ -141,24 +154,23 @@ namespace TrusonaSDK.API
       }
     }
 
-    internal static void HandleServiceException(TrusonaServiceException serviceException,
-                                               ErrorHandler errorHandler)
+    internal static void HandleServiceException(TrusonaServiceException serviceException, ErrorHandler errorHandler)
     {
-      errorHandler?.Invoke(serviceException.HttpResponse.StatusCode, serviceException.RequestId);
-      throw new TrusonaException("A network related error occurred. You should double check that you can connect to Trusona and try your request again",
-        serviceException);
+      string error = "A network related error occurred. You should double check that you can connect to Trusona and try your request again"; 
+      errorHandler?.Invoke(serviceException.HttpResponse.StatusCode, serviceException.RequestId);      
+      throw new TrusonaException(error, serviceException);
     }
 
     private static MapperConfiguration ConfigureMapper()
     {
       return new MapperConfiguration(cfg =>
       {
-        cfg.CreateMap<Trusonafication, TrusonaficationRequest>();
-        cfg.CreateMap<TrusonaficationResponse, TrusonaficationResult>()
-          .ForMember(dest => dest.BoundUserIdentifier, opt => opt.MapFrom(src => src.Result.BoundUserIdentifier));
-        cfg.CreateMap<TruCodeResponse, TruCode>();
-        cfg.CreateMap<UserDeviceResponse, UserDevice>();
+        cfg.CreateMap<TrusonaficationResponse, TrusonaficationResult>().ForMember(dest => dest.BoundUserIdentifier, opt => opt.MapFrom(src => src.Result.BoundUserIdentifier));
+        cfg.CreateMap<IntegrationAccountResponse, IntegrationAccount>();
         cfg.CreateMap<IdentityDocumentResponse, IdentityDocument>();
+        cfg.CreateMap<Trusonafication, TrusonaficationRequest>();
+        cfg.CreateMap<UserDeviceResponse, UserDevice>();
+        cfg.CreateMap<TruCodeResponse, TruCode>();
         cfg.CreateMap<DeviceResponse, Device>();
       });
     }
