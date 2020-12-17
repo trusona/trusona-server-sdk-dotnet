@@ -68,7 +68,7 @@ namespace TrusonaSDK.HTTP.Client.Security
     {
       sut.ContentType
          .Should()
-         .Be("application/json;charset=utf-8");
+         .Be("application/json; charset=utf-8");
     }
 
     [Fact]

@@ -31,19 +31,9 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       this._endpointUrl = endpointUrl;
     }
 
-    protected static T BlockAsyncForResult<T>(Task<T> task)
-    {
-      return task
-        .GetAwaiter()
-        .GetResult();
-    }
+    protected static T BlockAsyncForResult<T>(Task<T> task) => task.GetAwaiter().GetResult();
 
-    protected static void BlockAsyncForResult(Task task)
-    {
-      task
-        .GetAwaiter()
-        .GetResult();
-    }
+    protected static void BlockAsyncForResult(Task task) => task.GetAwaiter().GetResult();
 
     protected async Task<T> Get<T>(string resource,
                                    string id = null,
@@ -61,9 +51,27 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
 
       try
       {
-        return await HandleContent<T>(
-          response.EnsureSuccessStatusCode().Content
-        );
+        return await HandleContent<T>(response.EnsureSuccessStatusCode().Content);
+      }
+      catch (HttpRequestException ex)
+      {
+        throw new TrusonaServiceException(ex, response, TryResolveRequestId(response));
+      }
+    }
+
+    protected async Task<T> Get<T>(string resource, ICredentialProvider credentialProvider, List<Tuple<string, object>> queryParams)
+    {
+      var message = new HttpRequestMessage()
+      {
+        Method = HttpMethod.Get,
+        RequestUri = CollectionUrl(resource).AppendQueryParams(queryParams)
+      };
+
+      var response = await _clientWrapper.HandleRequest(message, credentialProvider);
+
+      try
+      {
+        return await HandleContent<T>(response.EnsureSuccessStatusCode().Content);
       }
       catch (HttpRequestException ex)
       {
@@ -90,9 +98,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
 
       try
       {
-        return await HandleContent<T>(
-          response.EnsureSuccessStatusCode().Content
-        );
+        return await HandleContent<T>(response.EnsureSuccessStatusCode().Content);
       }
       catch (HttpRequestException ex)
       {
@@ -176,30 +182,13 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       }
     }
 
-    private async Task<T> HandleContent<T>(HttpContent content)
-    {
-      return _serializer.DeserializeResponse<T>(
-        await content.ReadAsStringAsync());
-    }
+    private async Task<T> HandleContent<T>(HttpContent content) => _serializer.DeserializeResponse<T>(await content.ReadAsStringAsync());
 
     private static string TryResolveRequestId(HttpResponseMessage responseMessage)
-    {
-      IEnumerable<string> headerValues;
-      if (!responseMessage.Headers.TryGetValues(Headers.X_REQUEST_ID, out headerValues))
-      {
-        return null;
-      }
-      return headerValues.First();
-    }
+      => responseMessage.Headers.TryGetValues(Headers.X_REQUEST_ID, out IEnumerable<string> headerValues) ? headerValues.First() : null;
 
-    private FluentUrlBuilder CollectionUrl(string resource)
-    {
-      return new FluentUrlBuilder(_endpointUrl).AppendPath(resource);
-    }
+    private FluentUrlBuilder CollectionUrl(string resource) => new FluentUrlBuilder(_endpointUrl).AppendPath(resource);
 
-    private FluentUrlBuilder MemberUrl(string resource, string id)
-    {
-      return CollectionUrl(resource).AppendPath(id);
-    }
+    private FluentUrlBuilder MemberUrl(string resource, string id) => CollectionUrl(resource).AppendPath(id ?? "");
   }
 }

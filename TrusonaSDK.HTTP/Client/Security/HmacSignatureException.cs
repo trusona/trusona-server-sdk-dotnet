@@ -11,5 +11,7 @@ namespace TrusonaSDK.HTTP.Client.Security
   public class HmacSignatureException : Exception
   {
     public HmacSignatureException() { }
+
+    public HmacSignatureException(string message) : base(message) { }
   }
 }

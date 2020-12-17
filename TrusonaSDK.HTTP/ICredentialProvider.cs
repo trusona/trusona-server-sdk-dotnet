@@ -11,6 +11,9 @@ namespace TrusonaSDK.HTTP
   public interface ICredentialProvider
   {
     string Token { get; }
+
     string Secret { get; }
+
+    bool HasCredentials { get; }
   }
 }
