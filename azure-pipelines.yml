@@ -16,7 +16,8 @@ pool:
 variables:
   configuration: 'Release'
   artifacts: 'artifacts'
-  defaultBranch: 'master'
+  #defaultBranch: 'master'
+  defaultBranch: 'wip-cancel-trusonafication'
   repository: 'https://trusona.jfrog.io/trusona/api/nuget/nuget-local'
   solution: 'trusona-server-sdk-dotnet.sln'
 
