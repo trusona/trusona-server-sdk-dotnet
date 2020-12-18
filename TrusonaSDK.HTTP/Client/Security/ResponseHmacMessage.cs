@@ -73,10 +73,7 @@ namespace TrusonaSDK.HTTP.Client.Security
 
     #region Constructors
 
-    public ResponseHmacMessage(HttpResponseMessage message)
-    {
-      this._message = message;
-    }
+    public ResponseHmacMessage(HttpResponseMessage message) => _message = message;
 
     #endregion
 
@@ -84,13 +81,13 @@ namespace TrusonaSDK.HTTP.Client.Security
 
     private static string GetRequestUri(Uri requestUri) => requestUri?.PathAndQuery;
 
-    private static string GetContentType(HttpContent content) => content?.Headers.ContentType.ToString() ?? string.Empty;
+    private static string GetContentType(HttpContent content) => content?.Headers?.ContentType?.ToString() ?? string.Empty;
 
     private static string GetHeaderValue(HttpResponseHeaders headers, string name) => headers.TryGetValues(name, out IEnumerable<string> headerValues) ? headerValues?.First() : null;
 
     private static string Md5Digest(HttpContent httpContent)
     {
-      string valueToDigest = httpContent != null ? httpContent.ReadAsStringAsync().Result : string.Empty;
+      string valueToDigest = httpContent?.ReadAsStringAsync()?.Result ?? string.Empty;
       byte[] digest;
 
       using (var md5 = MD5.Create())
