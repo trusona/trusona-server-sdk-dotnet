@@ -26,14 +26,14 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
 
     public TrusonaficationResponse CancelTrusonafication(Guid id) => BlockAsyncForResult(CancelTrusonaficationAsync(id));
 
-    public Task<TrusonaficationResponse> CancelTrusonaficationAsync(Guid id) => Delete<TrusonaficationResponse>(id.ToString(), Endpoint, credentialProvider);
+    public Task<TrusonaficationResponse> CancelTrusonaficationAsync(Guid id) => Delete<TrusonaficationResponse>(id: id.ToString(), resource: Endpoint, credentialProvider: credentialProvider);
 
     public TrusonaficationResponse CreateTrusonafication(TrusonaficationRequest request) => BlockAsyncForResult(CreateTrusonaficationAsync(request));
 
-    public Task<TrusonaficationResponse> CreateTrusonaficationAsync(TrusonaficationRequest request) => Post<TrusonaficationResponse>(Endpoint, request, credentialProvider);
+    public Task<TrusonaficationResponse> CreateTrusonaficationAsync(TrusonaficationRequest request) => Post<TrusonaficationResponse>(resource: Endpoint, content: request, credentialProvider: credentialProvider);
 
     public TrusonaficationResponse GetTrusonafication(Guid id) => BlockAsyncForResult(GetTrusonaficationAsync(id));
 
-    public Task<TrusonaficationResponse> GetTrusonaficationAsync(Guid id) => Get<TrusonaficationResponse>(id.ToString(), Endpoint, credentialProvider);
+    public Task<TrusonaficationResponse> GetTrusonaficationAsync(Guid id) => Get<TrusonaficationResponse>(id: id.ToString(), resource: Endpoint, credentialProvider: credentialProvider);
   }
 }
