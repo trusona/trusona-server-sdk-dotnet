@@ -163,7 +163,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       }
     }
 
-    protected async Task Delete(string resource, string id, ICredentialProvider credentialProvider = null)
+    protected async Task Delete(string resource, string id, ICredentialProvider credentialProvider)
     {
       var message = new HttpRequestMessage
       {

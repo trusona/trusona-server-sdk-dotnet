@@ -97,5 +97,18 @@ namespace TrusonaSDK.API
         throw ex;
       }
     }
+
+    public static async Task CancelTrusonafication(this Trusona trusona, Guid trusonaficationId)
+    {
+      try
+      {
+        await trusona.TrusonaficationService.CancelTrusonaficationAsync(trusonaficationId);
+      }
+      catch (TrusonaServiceException ex)
+      {
+        HandleServiceException(ex, DefaultErrorHandler);
+        throw ex;
+      }
+    }
   }
 }

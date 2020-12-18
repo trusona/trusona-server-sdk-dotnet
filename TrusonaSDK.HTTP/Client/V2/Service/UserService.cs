@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using TrusonaSDK.HTTP.Client.V2.Serialization;
 
 namespace TrusonaSDK.HTTP.Client.V2.Service
@@ -20,14 +21,6 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
       );
     }
 
-    public async Task DeleteUserAsync(string userIdentifier)
-    {
-      await Delete(
-        id: userIdentifier,
-        resource: "/api/v2/users",
-        credentialProvider: _credentialProvider
-      );
-    }
-
+    public async Task DeleteUserAsync(string userIdentifier) => await Delete(userIdentifier, "/api/v2/users", _credentialProvider);
   }
 }
