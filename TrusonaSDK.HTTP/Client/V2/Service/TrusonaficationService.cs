@@ -24,9 +24,9 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
     public TrusonaficationService(IConfiguration configuration, IHttpClientWrapper clientWrapper)
       : base(new RequestResponseJsonConverter(), clientWrapper, configuration.EndpointUrl) => credentialProvider = configuration.CredentialProvider;
 
-    public TrusonaficationResponse CancelTrusonafication(Guid id) => BlockAsyncForResult(CancelTrusonaficationAsync(id));
+    public void CancelTrusonafication(Guid id) => BlockAsyncForResult(CancelTrusonaficationAsync(id));
 
-    public Task<TrusonaficationResponse> CancelTrusonaficationAsync(Guid id) => Delete<TrusonaficationResponse>(id: id.ToString(), resource: Endpoint, credentialProvider: credentialProvider);
+    public Task CancelTrusonaficationAsync(Guid id) => Delete(id: id.ToString(), resource: Endpoint, credentialProvider: credentialProvider);
 
     public TrusonaficationResponse CreateTrusonafication(TrusonaficationRequest request) => BlockAsyncForResult(CreateTrusonaficationAsync(request));
 
