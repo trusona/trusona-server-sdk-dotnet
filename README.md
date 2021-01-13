@@ -24,6 +24,7 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
       1. [Creating an Essential Trusonafication, with the user's email](#creating-an-essential-trusonafication-with-the-users-email)
       1. [Adding custom fields to a Trusonafication](#adding-custom-fields-to-a-trusonafication)
       1. [Creating an Executive Trusonafication](#creating-an-executive-trusonafication)
+      1. [Canceling a Trusonafication](#canceling-a-trusonafication)
    1. [Using TruCode for device discovery](#using-trucode-for-device-discovery)
    1. [Retrieving identity documents](#retrieving-identity-documents)
       1. [Retrieving all identity documents for a user](#retrieving-all-identity-documents-for-a-user)
@@ -388,6 +389,34 @@ Executive Trusonafications require the user to scan an identity document to auth
 | `CallbackUrl`         |    N     |  null   | A HTTPS URL to POST to when the trusonafication has been completed (accepted, rejected, or expired).<br><br> **NOTE:** The URL should include a randomized segment so it cannot be guessed and abused by third-parties e.g. https://your.domain.com/completed_authentications/f8abe61d-4e51-493f-97b1-464c157624f2. |
 
 [^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `DeviceIdentifier`, `TruCode`, `UserIdentifier`, and `EmailAddress`.
+
+
+
+### Canceling A Trusonafication
+
+Any Trusonafication that is `IN_PROGRESS` can be cancelled.
+
+```csharp
+var trusona = new Trusona(
+  token: "token",
+  secret: "secret"
+);
+
+var request = Trusonafication.Essential()
+                             .UserIdentifier("73CC202D-F866-4C72-9B43-9FCF5AF149BD")
+                             .Action("login")
+                             .Resource("Acme Bank")
+                             .Build();
+
+var trusonafication = await trusona.CreateTrusonafication(request);
+
+// if still IN_PROGRESS after some predetermined time, you may cancel it
+
+await trusona.CancelTrusonafication(trusonafication.id);
+```
+
+If the trusonafication cannot be successfully cancelled based on its status at the point the request is received, or if the trusonafication does not exist, an exception will be thrown.
+
 
 ### Using TruCode for device discovery
 
