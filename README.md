@@ -392,7 +392,7 @@ Executive Trusonafications require the user to scan an identity document to auth
 
 
 
-### Canceling A Trusonafication
+### Canceling a Trusonafication
 
 Any Trusonafication that is `IN_PROGRESS` can be cancelled.
 
