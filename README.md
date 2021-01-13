@@ -390,11 +390,13 @@ Executive Trusonafications require the user to scan an identity document to auth
 
 [^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `DeviceIdentifier`, `TruCode`, `UserIdentifier`, and `EmailAddress`.
 
+### Canceling A Trusonafication
 
+If a trusonafication is created and its purpose is no longer required, it may be necessary to cancel it to avoid having a indefinite `IN_PROGRESS` status.
 
-### Canceling a Trusonafication
+Any trusonafication that is `IN_PROGRESS` can be cancelled.
 
-Any Trusonafication that is `IN_PROGRESS` can be cancelled.
+Once successfully cancelled, a trusonafication can no longer be acted upon and its status is set as `CANCELLED`.
 
 ```csharp
 var trusona = new Trusona(
