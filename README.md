@@ -390,7 +390,7 @@ Executive Trusonafications require the user to scan an identity document to auth
 
 [^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `DeviceIdentifier`, `TruCode`, `UserIdentifier`, and `EmailAddress`.
 
-### Canceling A Trusonafication
+### Canceling a Trusonafication
 
 If a trusonafication is created and its purpose is no longer required, it may be necessary to cancel it to avoid having a indefinite `IN_PROGRESS` status.
 
