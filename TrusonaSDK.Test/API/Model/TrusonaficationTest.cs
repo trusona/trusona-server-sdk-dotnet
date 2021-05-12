@@ -114,8 +114,12 @@ namespace TrusonaSDK.API.Model
       sut.Prompt.Should().BeFalse();
       sut.UserPresence.Should().BeFalse();
       sut.ShowIdentityDocument.Should().BeFalse();
-      sut.CustomFields.GetValueOrDefault("african", null).Should().Be("tiger");
-      sut.CustomFields.GetValueOrDefault("taco", null).Should().Be(1);
+
+      sut.CustomFields.TryGetValue("african", out object value);
+      value.Should().Be("tiger");
+
+      sut.CustomFields.TryGetValue("taco", out value);
+      value.Should().Be(1);
     }
 
     [Fact]
