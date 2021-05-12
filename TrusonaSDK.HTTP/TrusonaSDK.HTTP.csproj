@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>trusona-sdk-http.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -13,5 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 </Project>

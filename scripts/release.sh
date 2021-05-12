@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 GIT_STATUS=$(git status -s)
+
 if [ ! -z "${GIT_STATUS}" ]; then
   echo "Repo is not clean. Resolve the following uncomitted changes:"
   echo ${GIT_STATUS}
@@ -8,6 +9,10 @@ if [ ! -z "${GIT_STATUS}" ]; then
 fi
 
 RELEASE_VERSION=$(cat *.sln | grep "version" | awk -F=. '{print $2}' | tr -d '\r')
+
+if [[ `git branch --show-current` = net-472 ]]; then
+  RELEASE_VERSION="${RELEASE_VERSION}-net-472"
+fi
 
 TAG_NAME="v${RELEASE_VERSION}"
 git tag -a ${TAG_NAME} -m "release ${TAG_NAME}"

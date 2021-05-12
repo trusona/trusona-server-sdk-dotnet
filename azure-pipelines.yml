@@ -42,13 +42,6 @@ steps:
     projects: 'TrusonaSDK.*/*.csproj'
     arguments: '--verbosity quiet --configuration $(configuration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Testing...'
-  inputs:
-    command: test
-    projects: 'TrusonaSDK.Test/TrusonaSDK.Test.csproj'
-    arguments: '--configuration $(configuration) -v quiet --filter Category!=Integration --collect "Code Coverage"'
-
 - task: Bash@3
   displayName: 'Before packing...'
   env:
@@ -64,6 +57,8 @@ steps:
         PackageVersion="${versionSuffix}"
       elif [[ $branchName == master ]]; then
         PackageVersion="${versionSuffix}-beta-`echo ${commitHash} | head -c 8`"
+      elif [[ $branchName == net-472 ]]; then
+        PackageVersion="${versionSuffix}-net472-`echo ${commitHash} | head -c 8`"
       else
         PackageVersion="${versionSuffix}-preview-`echo ${commitHash} | head -c 8`"
       fi
