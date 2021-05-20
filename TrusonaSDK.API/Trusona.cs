@@ -37,6 +37,7 @@ namespace TrusonaSDK.API
     private IUserService _userService;
     private IUserBindingService _userBindingService;
     private IIntegrationAccountService _integrationAccountService;
+    private IIntegrationCredentialService _integrationCredentialService;
 
     internal readonly IMapper mapper;
     internal readonly TimeSpan pollingInterval = TimeSpan.FromSeconds(5);
@@ -90,6 +91,15 @@ namespace TrusonaSDK.API
       {
         if (_integrationAccountService == null) { _integrationAccountService = _serviceFactory.CreateInstance<IntegrationAccountService>(); }
         return _integrationAccountService;
+      }
+    }
+
+    internal IIntegrationCredentialService IntegrationCredentialService
+    {
+      get
+      {
+        _integrationCredentialService = _integrationCredentialService ?? _serviceFactory.CreateInstance<IntegrationCredentialService>();
+        return _integrationCredentialService;
       }
     }
 
