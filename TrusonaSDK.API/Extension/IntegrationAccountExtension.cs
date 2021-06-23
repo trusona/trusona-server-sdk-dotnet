@@ -27,11 +27,17 @@ namespace TrusonaSDK.API.Extension
       }
     }
 
+    [Obsolete]
     public static async Task<List<IntegrationAccount>> GetIntegrationAccounts(this Trusona trusona, Guid integrationId, string identifier)
+    {
+      return await GetIntegrationAccounts(trusona, integrationId, new string[] { identifier });
+    }
+
+    public static async Task<List<IntegrationAccount>> GetIntegrationAccounts(this Trusona trusona, Guid integrationId, string[] identifiers)
     {
       try
       {
-        var response = await trusona.IntegrationAccountService.GetIntegrationAccountsAsync(integrationId, identifier);
+        var response = await trusona.IntegrationAccountService.GetIntegrationAccountsAsync(integrationId, identifiers);
         return trusona.mapper.Map<List<IntegrationAccount>>(response);
       }
       catch (TrusonaServiceException ex)
@@ -40,5 +46,6 @@ namespace TrusonaSDK.API.Extension
         throw ex;
       }
     }
+
   }
 }
