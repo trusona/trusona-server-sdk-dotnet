@@ -28,11 +28,17 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
         );
     }
 
-    public List<IntegrationAccountResponse> GetIntegrationAccounts(Guid integrationId, string identifier) => BlockAsyncForResult(GetIntegrationAccountsAsync(integrationId, identifier));
+    public List<IntegrationAccountResponse> GetIntegrationAccounts(Guid integrationId, string[] identifiers) => BlockAsyncForResult(GetIntegrationAccountsAsync(integrationId, identifiers));
 
-    public Task<List<IntegrationAccountResponse>> GetIntegrationAccountsAsync(Guid integrationId, string identifier)
+    public Task<List<IntegrationAccountResponse>> GetIntegrationAccountsAsync(Guid integrationId, string[] identifiers)
     {
-      var queryParams = new List<Tuple<string, object>> { new Tuple<string, object>("identifier", identifier) };
+      List<Tuple<string, object>> queryParams = new List<Tuple<string, object>>();
+
+      foreach (string identifier in identifiers)
+      {
+        queryParams.Add(new Tuple<string, object>("identifier", identifier));
+      }
+
       return Get<List<IntegrationAccountResponse>>(string.Format(EndpointTemplate, integrationId), credentialProvider, queryParams);
     }
   }

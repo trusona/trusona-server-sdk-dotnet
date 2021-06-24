@@ -13,8 +13,8 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
 
     IntegrationAccountResponse CreateIntegrationAccount(Guid integrationId, IntegrationAccountRequest integrationAccount);
 
-    List<IntegrationAccountResponse> GetIntegrationAccounts(Guid integrationId, string identifier);
+    List<IntegrationAccountResponse> GetIntegrationAccounts(Guid integrationId, string[] identifiers);
 
-    Task<List<IntegrationAccountResponse>> GetIntegrationAccountsAsync(Guid integrationId, string identifier);
+    Task<List<IntegrationAccountResponse>> GetIntegrationAccountsAsync(Guid integrationId, string[] identifiers);
   }
 }
