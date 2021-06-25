@@ -36,7 +36,7 @@ namespace TrusonaSDK.HTTP.Client.V2.Service
 
       foreach (string identifier in identifiers)
       {
-        queryParams.Add(new Tuple<string, object>("identifier", identifier));
+        queryParams.Add(new Tuple<string, object>("identifier[]", identifier));
       }
 
       return Get<List<IntegrationAccountResponse>>(string.Format(EndpointTemplate, integrationId), credentialProvider, queryParams);
