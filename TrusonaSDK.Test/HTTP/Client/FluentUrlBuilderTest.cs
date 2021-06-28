@@ -8,6 +8,7 @@
 using System;
 using Xunit;
 using FluentAssertions;
+using System.Collections.Generic;
 
 namespace TrusonaSDK.HTTP.Client
 {
@@ -81,6 +82,26 @@ namespace TrusonaSDK.HTTP.Client
         .Build().AbsoluteUri
         .Should()
           .Be("https://jones.net/?tacos=bell");
+    }
+
+    [Theory]
+    [InlineData("pizza[]", "pizza-hut", "dominos", "papa-johns")]
+    public void AppendQueryParam_should_generate_valid_uri_with_array(string key1, string value1, string value2, string value3)
+    {
+      var list = new List<Tuple<string, object>>
+      {
+        new Tuple<string, object>(key1, value1),
+        new Tuple<string, object>(key1, value2),
+        new Tuple<string, object>(key1, value3)
+      };
+
+      var square_pair = "%5B%5D";
+
+      sut
+        .AppendQueryParams(list)
+        .Build().AbsoluteUri
+        .Should()
+        .Equals($"https://jones.net/?pizza{square_pair}=pizza-hut&pizza{square_pair}=dominos&pizza{square_pair}=papa-johns");
     }
   }
 }

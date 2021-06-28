@@ -8,18 +8,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace TrusonaSDK.HTTP.Client
 {
   public class FluentUrlBuilder : UriBuilder
   {
-    private List<string> _pathParts;
-    private List<Tuple<string, object>> _queryParams;
+    private readonly List<string> _pathParts;
+    private readonly List<Tuple<string, string>> _queryParams;
 
     public FluentUrlBuilder(Uri baseUrl) : base(baseUrl)
     {
-      this._pathParts = new List<string>();
-      this._queryParams = new List<Tuple<string, object>>();
+      _pathParts = new List<string>();
+      _queryParams = new List<Tuple<string, string>>();
     }
 
     public FluentUrlBuilder AppendPath(string path)
@@ -31,16 +32,28 @@ namespace TrusonaSDK.HTTP.Client
 
     public FluentUrlBuilder AppendQueryParam(string key, object value)
     {
-      _queryParams.Add(new Tuple<string, object>(key, value));
-      Query = string.Join("&", _queryParams.Select(p => string.Join("=", new object[] { key, value })));
+      string safeKey = UrlEncode(key);
+      string safeValue = UrlEncode(value.ToString());
+
+      _queryParams.Add(new Tuple<string, string>(safeKey, safeValue));
+      string data = "";
+
+      foreach (Tuple<string, string> pair in _queryParams)
+      {
+        data += $"{pair.Item1}={pair.Item2}&";
+      }
+
+      Query = data.Substring(0, data.Length - 1);
       return this;
     }
+
+    private string UrlEncode(string value) => WebUtility.UrlEncode(value);
 
     public FluentUrlBuilder AppendQueryParams(List<Tuple<string, object>> queryParams)
     {
       if (queryParams != null)
       {
-        foreach (var pair in queryParams)
+        foreach (Tuple<string, object> pair in queryParams)
         {
           AppendQueryParam(pair.Item1, pair.Item2);
         }
