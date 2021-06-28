@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
 
 namespace TrusonaSDK.HTTP.Client
 {
@@ -47,7 +47,7 @@ namespace TrusonaSDK.HTTP.Client
       return this;
     }
 
-    private string UrlEncode(string value) => HttpUtility.UrlEncode(value);
+    private string UrlEncode(string value) => WebUtility.UrlEncode(value);
 
     public FluentUrlBuilder AppendQueryParams(List<Tuple<string, object>> queryParams)
     {
