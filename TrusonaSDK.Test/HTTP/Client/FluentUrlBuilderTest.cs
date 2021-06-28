@@ -95,11 +95,13 @@ namespace TrusonaSDK.HTTP.Client
         new Tuple<string, object>(key1, value3)
       };
 
+      var square_pair = "%5B%5D";
+
       sut
         .AppendQueryParams(list)
         .Build().AbsoluteUri
         .Should()
-          .Be("https://jones.net/?pizza%5b%5d=pizza-hut&pizza%5b%5d=dominos&pizza%5b%5d=papa-johns");
+        .Equals($"https://jones.net/?pizza{square_pair}=pizza-hut&pizza{square_pair}=dominos&pizza{square_pair}=papa-johns");
     }
   }
 }
