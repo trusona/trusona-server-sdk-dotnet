@@ -1,10 +1,12 @@
 ﻿//
 // TrusonaficationStatus.cs
 //
-// Author:
+// Authors:
 //       David Kopack <d@trusona.com>
+//       Nikolas Mangu-Thitu <n@trusona.com>
 //
-// Copyright (c) 2018 Trusona, Inc.
+// Copyright (c) 2018-2021 Trusona, Inc.
+//
 namespace TrusonaSDK.API.Model
 {
   public enum TrusonaficationStatus
@@ -43,6 +45,11 @@ namespace TrusonaSDK.API.Model
     /// <summary>
     /// The authentication request was not responded to or timed-out before getting a response.
     /// </summary>
-    EXPIRED
+    EXPIRED,
+
+    /// <summary>
+    /// The authentication request was canceled by the sender.
+    /// </summary>
+    CANCELED
   }
 }
