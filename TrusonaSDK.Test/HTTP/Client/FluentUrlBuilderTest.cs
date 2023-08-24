@@ -101,7 +101,7 @@ namespace TrusonaSDK.HTTP.Client
         .AppendQueryParams(list)
         .Build().AbsoluteUri
         .Should()
-        .Equals($"https://jones.net/?pizza{square_pair}=pizza-hut&pizza{square_pair}=dominos&pizza{square_pair}=papa-johns");
+        .Be($"https://jones.net/?pizza{square_pair}=pizza-hut&pizza{square_pair}=dominos&pizza{square_pair}=papa-johns");
     }
   }
 }
